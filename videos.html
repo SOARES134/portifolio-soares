@@ -19,28 +19,30 @@
             min-height: 100vh;
         }
 
-        /* --- BOTÃO "VOLTAR" (Retornou pro design foda original) --- */
+        /* --- BOTÃO "VOLTAR" (Igual ao da sua foto) --- */
         .back-btn {
+            display: inline-block;
             text-decoration: none;
             color: #fff;
-            border: 1px solid #333;
-            padding: 10px 20px;
-            border-radius: 5px;
+            border: 2px solid #ffffff;
+            padding: 12px 30px;
+            border-radius: 50px; /* Deixa arredondado */
             transition: 0.3s;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             font-size: 14px;
             text-transform: uppercase;
             font-weight: 600;
             letter-spacing: 1px;
+            background-color: transparent;
         }
 
         .back-btn:hover {
-            background: #fff;
-            color: #000;
-            border-color: #fff;
+            background: #ffffff;
+            color: #0f0f0f;
+            transform: scale(1.05);
         }
 
-        /* --- TÍTULO TEXTURIZADO (Igual ao "SOARES") --- */
+        /* --- TÍTULO COM DEGRADÊ CINZA/PRETO --- */
         .main-title {
             text-transform: uppercase;
             letter-spacing: 6px;
@@ -48,16 +50,11 @@
             font-size: 4rem;
             text-align: center;
             font-weight: 800;
-            /* A mágica da textura listrada */
-            background: repeating-linear-gradient(
-                -45deg,
-                #ffffff,
-                #ffffff 4px,
-                #777777 4px,
-                #777777 8px
-            );
+            /* Gradiente de cinza claro para cinza escuro */
+            background: linear-gradient(to bottom, #ffffff, #666666);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0px 10px 20px rgba(0,0,0,0.8); /* Dá profundidade no fundo preto */
         }
 
         .sub-title {
@@ -127,7 +124,7 @@
             transform: translate(-50%, -50%);
             width: 60px;
             height: 40px;
-            background: rgba(255, 0, 0, 0.8); /* Vermelho YouTube */
+            background: rgba(255, 0, 0, 0.8);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -177,10 +174,10 @@
 </head>
 <body>
 
-    <a href="index.html" class="back-btn">← VOLTAR</a>
+    <a href="index.html" class="back-btn">← VOLTAR PARA O INÍCIO</a>
 
     <h1 class="main-title">PORTFOLIO</h1>
-    <p class="sub-title">Confira minhas principais edições e produções</p>
+    <p class="sub-title">Confira minhas principais edições e produções cinematográficas</p>
 
     <div class="video-grid">
 

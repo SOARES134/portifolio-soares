@@ -250,20 +250,93 @@
             nav { display: none; }
             section { padding: 80px 5%; }
         }
+
+/* Estilo básico para o menu não bugar no PC */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+}
+
+.menu li {
+    margin-left: 20px;
+}
+
+#menu-toggle {
+    display: none; /* Esconde o checkbox */
+}
+
+/* --- CONFIGURAÇÃO PARA MOBILE --- */
+@media (max-width: 768px) {
+    .menu {
+        display: none; /* Esconde o menu normal no celular */
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #333; /* Cor de fundo do menu mobile */
+        text-align: center;
+    }
+
+    .menu li {
+        margin: 15px 0;
+    }
+
+    /* Mostra o ícone de 3 barrinhas no celular */
+    .menu-icon {
+        display: block;
+        cursor: pointer;
+    }
+
+    .menu-icon span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        margin: 5px;
+        transition: 0.3s;
+    }
+
+    /* Quando clicar no botão, mostra o menu */
+    #menu-toggle:checked ~ .menu {
+        display: flex;
+    }
+}
+
+/* Esconde o ícone no PC */
+@media (min-width: 769px) {
+    .menu-icon {
+        display: none;
+    }
+        
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">OTÁVIO.</div>
-        <nav>
-            <ul>
-                <li><a href="#home">Início</a></li>
-                <li><a href="#about">Sobre</a></li>
-                <li><a href="#services">Serviços</a></li>
-                <li><a href="#contact">Contato</a></li>
-                <li><a href="videos.html">Vídeos</a></li>
-            </ul>
+        
+            <nav class="navbar">
+    <div class="logo">Meu Portfólio</div>
+    
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
+    
+    <ul class="menu">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="videos.html">Vídeos</a></li>
+        </ul>
         </nav>
     </header>
 

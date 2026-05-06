@@ -1,54 +1,88 @@
-<style>
-    /* Estilo Dark Geral */
-    body {
-        background-color: #000000; /* Preto total */
-        color: #ffffff; /* Texto branco */
-        font-family: 'Poppins', sans-serif; /* Mesma fonte do index */
-        margin: 0;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Vídeos - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Estilo Dark igual ao Index */
+        body {
+            background-color: #0f0f0f; /* Cinza bem escuro gamer */
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-    h1 {
-        color: #ffffff;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: 30px;
-    }
+        h1 {
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
 
-    /* Botão de Voltar Estilizado */
-    .back-btn {
-        display: inline-block;
-        margin-bottom: 20px;
-        padding: 10px 20px;
-        background-color: #1a1a1a; /* Cinza bem escuro */
-        color: #ffffff;
-        text-decoration: none;
-        border-radius: 5px;
-        border: 1px solid #333;
-        transition: 0.3s;
-        font-weight: bold;
-    }
+        /* Botão de Voltar caprichado */
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 12px 25px;
+            background-color: transparent;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 2px solid #ffffff;
+            transition: 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
 
-    .back-btn:hover {
-        background-color: #ffffff;
-        color: #000000;
-    }
+        .back-btn:hover {
+            background-color: #ffffff;
+            color: #0f0f0f;
+            transform: scale(1.05);
+        }
 
-    /* Container dos vídeos */
-    .video-container {
-        width: 100%;
-        max-width: 800px;
-        background: #0a0a0a; /* Fundo levemente diferente para destacar o vídeo */
-        padding: 15px;
-        border-radius: 10px;
-        border: 1px solid #1f1f1f;
-    }
+        /* Container do Vídeo */
+        .video-container {
+            width: 100%;
+            max-width: 900px;
+            background: #1a1a1a; 
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            display: flex;
+            justify-content: center;
+        }
 
-    iframe {
-        width: 100%;
-        border-radius: 8px;
-    }
-</style>
+        iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 10px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-btn">← Voltar para o Início</a>
+
+    <h1>Minhas Edições</h1>
+
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/SEU_VIDEO_AQUI" 
+                title="YouTube video player" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+        </iframe>
+    </div>
+
+</body>
+</html>

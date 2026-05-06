@@ -404,5 +404,210 @@
         <p style="color: var(--gray); font-size: 0.8rem;">&copy; 2026 OTÁVIO. TODOS OS DIREITOS RESERVADOS.</p>
     </footer>
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTÁVIO | Professional Video Editor</title>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@300;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-black: #000000;
+            --bg-card: #0d0d0d;
+            --accent: #ffffff;
+            --gray: #888888;
+            --border: #1a1a1a;
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+
+        body {
+            background-color: var(--bg-black);
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* --- ESTILOS DO SITE (RESUMIDOS) --- */
+        header { position: fixed; top: 0; width: 100%; padding: 25px 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); z-index: 9999; }
+        .logo { font-family: 'Syncopate', sans-serif; font-size: 1.5rem; color: var(--accent); }
+        section { padding: 120px 8%; min-height: 80vh; display: flex; flex-direction: column; justify-content: center; }
+        .section-title { font-family: 'Syncopate', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 50px; }
+
+        /* --- CHATBOX UI --- */
+        #chat-container {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            width: 350px;
+            height: 450px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            display: none; /* Escondido por padrão */
+            flex-direction: column;
+            z-index: 10000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        #chat-header {
+            padding: 15px;
+            background: #111;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .message { padding: 8px 12px; border-radius: 10px; max-width: 80%; }
+        .user-msg { background: #333; align-self: flex-end; color: white; }
+        .ai-msg { background: var(--accent); color: black; align-self: flex-start; }
+
+        #chat-input-area {
+            padding: 15px;
+            display: flex;
+            gap: 10px;
+            border-top: 1px solid var(--border);
+        }
+
+        #chat-input {
+            flex: 1;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: white;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        /* BOTÃO DO CHAT */
+        .chat-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 110px; /* Do lado do WhatsApp */
+            background: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: black;
+            cursor: pointer;
+            z-index: 9999;
+            transition: var(--transition);
+        }
+        
+        .chat-btn:hover { transform: scale(1.1); background: var(--gray); }
+
+        /* WHATSAPP FLOAT */
+        .wa-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; color: white; z-index: 9999; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">OTÁVIO.</div>
+    </header>
+
+    <section id="home">
+        <h1>IA ASSISTANT</h1>
+        <p>Clique no ícone flutuante para falar com minha IA sobre edições e orçamentos.</p>
+    </section>
+
+    <!-- UI DO CHAT -->
+    <div id="chat-container">
+        <div id="chat-header">
+            <span>Otávio AI Helper</span>
+            <button onclick="toggleChat()" style="background:none; border:none; color:white; cursor:pointer;">X</button>
+        </div>
+        <div id="chat-messages">
+            <div class="message ai-msg">Olá! Sou o assistente do Otávio. Como posso te ajudar com sua edição hoje?</div>
+        </div>
+        <div id="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Pergunte algo...">
+            <button onclick="sendMessage()" style="background:white; border:none; padding: 0 10px; border-radius:5px; cursor:pointer;">Ir</button>
+        </div>
+    </div>
+
+    <!-- BOTÕES FLUTUANTES -->
+    <div class="chat-btn" onclick="toggleChat()">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <a href="https://wa.me/558492036576" class="wa-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- IMPLEMENTAÇÃO DA API GEMINI -->
+    <script type="module">
+        import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+
+        // CONFIGURAÇÃO - COLOQUE SUA CHAVE AQUI
+        const API_KEY = "SUA_CHAVE_API_AQUI"; 
+        const genAI = new GoogleGenerativeAI(API_KEY);
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-1.5-flash",
+            systemInstruction: "Você é o assistente do Otávio, um editor de vídeos de 15 anos especializado em MTA, FiveM e otimização de PC. Seja direto, use gírias leves de gamer e foque em ajudar clientes a entenderem os serviços dele."
+        });
+
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+
+        window.toggleChat = function() {
+            const container = document.getElementById('chat-container');
+            container.style.display = container.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        window.sendMessage = async function() {
+            const text = chatInput.value;
+            if (!text) return;
+
+            // Adiciona msg do usuário na tela
+            appendMessage(text, 'user-msg');
+            chatInput.value = '';
+
+            try {
+                const result = await model.generateContent(text);
+                const response = await result.response;
+                appendMessage(response.text(), 'ai-msg');
+            } catch (error) {
+                appendMessage("Erro ao conectar com a IA. Verifique sua API Key.", 'ai-msg');
+            }
+        }
+
+        function appendMessage(text, className) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${className}`;
+            msgDiv.innerText = text;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Enviar com a tecla Enter
+        chatInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") sendMessage();
+        });
+    </script>
+    
 </body>
 </html>

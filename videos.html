@@ -19,14 +19,14 @@
             min-height: 100vh;
         }
 
-        /* --- BOTÃO "VOLTAR" (Igual ao da sua foto) --- */
+        /* --- BOTÃO "VOLTAR" --- */
         .back-btn {
             display: inline-block;
             text-decoration: none;
             color: #fff;
             border: 2px solid #ffffff;
             padding: 12px 30px;
-            border-radius: 50px; /* Deixa arredondado */
+            border-radius: 50px;
             transition: 0.3s;
             margin-bottom: 40px;
             font-size: 14px;
@@ -43,7 +43,7 @@
             transform: scale(1.05);
         }
 
-        /* --- TÍTULO COM DEGRADÊ CINZA/PRETO --- */
+        /* --- TÍTULO COM DEGRADÊ --- */
         .main-title {
             text-transform: uppercase;
             letter-spacing: 6px;
@@ -51,11 +51,10 @@
             font-size: 4rem;
             text-align: center;
             font-weight: 800;
-            /* Gradiente de cinza claro para cinza escuro */
             background: linear-gradient(to bottom, #ffffff, #666666);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0px 10px 20px rgba(0,0,0,0.8); /* Dá profundidade no fundo preto */
+            text-shadow: 0px 10px 20px rgba(0,0,0,0.8);
         }
 
         .sub-title {
@@ -182,9 +181,11 @@
 
     <div class="video-grid">
 
+        <!-- VÍDEO 1 -->
         <div class="video-card">
-            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'https://i.ytimg.com/an_webp/sQSa9ennQbo/mqdefault_6s.webp?du=3000&sqp=CMi_ptYG&rs=AOn4CLCJZLM05LhTMzs17Lt4IPUA-wtI7w')">
-                <img src="https://www.youtube.com/watch?v=sQSa9ennQbo&t=10s" alt="Capa" class="video-thumb">
+            <!-- Basta colocar o link completo ou o ID na função e na imagem -->
+            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'sQSa9ennQbo')">
+                <img src="https://img.youtube.com/vi/sQSa9ennQbo/hqdefault.jpg" alt="Capa" class="video-thumb">
                 <div class="play-icon">▶</div>
                 <iframe src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
@@ -194,9 +195,10 @@
             </div>
         </div>
 
+        <!-- VÍDEO 2 (Exemplo pronto para você alterar o link) -->
         <div class="video-card">
-            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'ID_DO_VIDEO_AQUI')">
-                <img src="https://img.youtube.com/vi/ID_DO_VIDEO_AQUI/maxresdefault.jpg" alt="Capa" class="video-thumb">
+            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'SEU_LINK_OU_ID_AQUI')">
+                <img src="https://img.youtube.com/vi/SEU_LINK_OU_ID_AQUI/hqdefault.jpg" alt="Capa" class="video-thumb">
                 <div class="play-icon">▶</div>
                 <iframe src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
@@ -206,9 +208,10 @@
             </div>
         </div>
 
+        <!-- VÍDEO 3 -->
         <div class="video-card">
-            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'ID_DO_VIDEO_AQUI')">
-                <img src="https://img.youtube.com/vi/ID_DO_VIDEO_AQUI/maxresdefault.jpg" alt="Capa" class="video-thumb">
+            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'SEU_LINK_OU_ID_AQUI')">
+                <img src="https://img.youtube.com/vi/SEU_LINK_OU_ID_AQUI/hqdefault.jpg" alt="Capa" class="video-thumb">
                 <div class="play-icon">▶</div>
                 <iframe src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
@@ -218,9 +221,10 @@
             </div>
         </div>
 
+        <!-- VÍDEO 4 -->
         <div class="video-card">
-            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'ID_DO_VIDEO_AQUI')">
-                <img src="https://img.youtube.com/vi/ID_DO_VIDEO_AQUI/maxresdefault.jpg" alt="Capa" class="video-thumb">
+            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'SEU_LINK_OU_ID_AQUI')">
+                <img src="https://img.youtube.com/vi/SEU_LINK_OU_ID_AQUI/hqdefault.jpg" alt="Capa" class="video-thumb">
                 <div class="play-icon">▶</div>
                 <iframe src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
@@ -230,9 +234,10 @@
             </div>
         </div>
 
+        <!-- VÍDEO 5 -->
         <div class="video-card">
-            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'ID_DO_VIDEO_AQUI')">
-                <img src="https://img.youtube.com/vi/ID_DO_VIDEO_AQUI/maxresdefault.jpg" alt="Capa" class="video-thumb">
+            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'SEU_LINK_OU_ID_AQUI')">
+                <img src="https://img.youtube.com/vi/SEU_LINK_OU_ID_AQUI/hqdefault.jpg" alt="Capa" class="video-thumb">
                 <div class="play-icon">▶</div>
                 <iframe src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
@@ -242,9 +247,10 @@
             </div>
         </div>
 
+        <!-- VÍDEO 6 -->
         <div class="video-card">
-            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'ID_DO_VIDEO_AQUI')">
-                <img src="https://img.youtube.com/vi/ID_DO_VIDEO_AQUI/maxresdefault.jpg" alt="Capa" class="video-thumb">
+            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'SEU_LINK_OU_ID_AQUI')">
+                <img src="https://img.youtube.com/vi/SEU_LINK_OU_ID_AQUI/hqdefault.jpg" alt="Capa" class="video-thumb">
                 <div class="play-icon">▶</div>
                 <iframe src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
@@ -254,9 +260,10 @@
             </div>
         </div>
 
+        <!-- VÍDEO 7 -->
         <div class="video-card">
-            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'ID_DO_VIDEO_AQUI')">
-                <img src="https://img.youtube.com/vi/ID_DO_VIDEO_AQUI/maxresdefault.jpg" alt="Capa" class="video-thumb">
+            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'SEU_LINK_OU_ID_AQUI')">
+                <img src="https://img.youtube.com/vi/SEU_LINK_OU_ID_AQUI/hqdefault.jpg" alt="Capa" class="video-thumb">
                 <div class="play-icon">▶</div>
                 <iframe src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
@@ -266,9 +273,10 @@
             </div>
         </div>
 
+        <!-- VÍDEO 8 -->
         <div class="video-card">
-            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'ID_DO_VIDEO_AQUI')">
-                <img src="https://img.youtube.com/vi/ID_DO_VIDEO_AQUI/maxresdefault.jpg" alt="Capa" class="video-thumb">
+            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'SEU_LINK_OU_ID_AQUI')">
+                <img src="https://img.youtube.com/vi/SEU_LINK_OU_ID_AQUI/hqdefault.jpg" alt="Capa" class="video-thumb">
                 <div class="play-icon">▶</div>
                 <iframe src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
@@ -278,9 +286,10 @@
             </div>
         </div>
 
+        <!-- VÍDEO 9 -->
         <div class="video-card">
-            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'ID_DO_VIDEO_AQUI')">
-                <img src="https://img.youtube.com/vi/ID_DO_VIDEO_AQUI/maxresdefault.jpg" alt="Capa" class="video-thumb">
+            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'SEU_LINK_OU_ID_AQUI')">
+                <img src="https://img.youtube.com/vi/SEU_LINK_OU_ID_AQUI/hqdefault.jpg" alt="Capa" class="video-thumb">
                 <div class="play-icon">▶</div>
                 <iframe src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
@@ -290,9 +299,10 @@
             </div>
         </div>
 
+        <!-- VÍDEO 10 -->
         <div class="video-card">
-            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'ID_DO_VIDEO_AQUI')">
-                <img src="https://img.youtube.com/vi/ID_DO_VIDEO_AQUI/maxresdefault.jpg" alt="Capa" class="video-thumb">
+            <div class="thumbnail-wrapper" onclick="loadVideo(this, 'SEU_LINK_OU_ID_AQUI')">
+                <img src="https://img.youtube.com/vi/SEU_LINK_OU_ID_AQUI/hqdefault.jpg" alt="Capa" class="video-thumb">
                 <div class="play-icon">▶</div>
                 <iframe src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
@@ -305,7 +315,15 @@
     </div>
 
     <script>
-        function loadVideo(wrapper, videoId) {
+        // Função inteligente que extrai o ID do YouTube automaticamente se você colar o link completo
+        function extrairIdYouTube(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : url;
+        }
+
+        function loadVideo(wrapper, videoUrl) {
+            const videoId = extrairIdYouTube(videoUrl);
             const iframe = wrapper.querySelector('iframe');
             const thumb = wrapper.querySelector('.video-thumb');
             const playIcon = wrapper.querySelector('.play-icon');

@@ -1,121 +1,380 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Meu Navegador</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10131c">
+
+<title>Soares Browser</title>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  background: #17191f;
-  color: white;
-  font-family: Arial;
+  background: #10131c;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
-  padding: 20px;
-  text-align: center;
-  font-weight: bold;
-}
-
-.barra {
+  padding: 17px;
+  background: #171b27;
+  border-bottom: 1px solid #292f40;
   display: flex;
-  padding: 10px;
-  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
 }
 
-input {
-  flex: 1;
-  width: 50%;
-  padding: 13px;
-  border: 0;
-  border-radius: 8px;
-  background: #343844;
-  color: white;
+.logo {
+  font-size: 19px;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
-button {
-  background: #5865f2;
-  color: white;
-  border: 0;
-  border-radius: 8px;
+.logo span {
+  color: #7485ff;
+}
+
+.status {
+  color: #65dc9a;
+  font-size: 12px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   padding: 12px;
+  background: #191e2b;
+}
+
+.toolbar button {
+  min-width: 38px;
+  height: 40px;
+  border: 0;
+  border-radius: 9px;
+  background: #292f40;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.toolbar button:active {
+  background: #5865f2;
+}
+
+.address {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  background: #292f40;
+  border: 1px solid #3a4258;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.address input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  padding: 0 12px;
+  background: transparent;
+  color: white;
+  font-size: 13px;
+}
+
+.go {
+  background: #5865f2 !important;
+  padding: 0 14px;
+  font-size: 13px !important;
+}
+
+.tools {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 13px;
+  background: #141925;
+  font-size: 12px;
+}
+
+.tools button {
+  border: 0;
+  background: transparent;
+  color: #9ca9ff;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.viewer {
+  flex: 1;
+  position: relative;
+  background: #fff;
+  min-height: 0;
 }
 
 iframe {
   width: 100%;
-  height: 75vh;
-  background: white;
+  height: 100%;
   border: 0;
+  background: white;
 }
 
-#alternativa {
+.home {
+  position: absolute;
+  inset: 0;
+  background: #10131c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
   text-align: center;
-  padding: 20px;
+}
+
+.home h1 {
+  font-size: 32px;
+  margin-bottom: 5px;
+}
+
+.home p {
+  color: #929bad;
+  font-size: 14px;
+}
+
+.shortcuts {
+  display: flex;
+  gap: 12px;
+  margin-top: 25px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.shortcuts button {
+  padding: 14px;
+  border: 1px solid #333b50;
+  background: #1c2332;
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+footer {
+  background: #171b27;
+  padding: 10px;
+  text-align: center;
+  font-size: 11px;
+  color: #788298;
+}
+
+@media(max-width: 480px) {
+  header {
+    padding: 13px;
+  }
+
+  .toolbar {
+    gap: 5px;
+    padding: 8px;
+  }
+
+  .toolbar button {
+    min-width: 32px;
+    height: 38px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header>🌐 ANÔNIMO </header>
+<header>
+  <div class="logo">🌐 SOARES <span>BROWSER</span></div>
+  <div class="status">● ONLINE</div>
+</header>
 
-<div class="barra">
-  <input id="url" placeholder="https://www.xvideos.com">
-  <button onclick="abrir()">Abrir</button>
+<div class="toolbar">
+
+  <button onclick="voltar()" title="Voltar">‹</button>
+
+  <button onclick="avancar()" title="Avançar">›</button>
+
+  <button onclick="recarregar()" title="Atualizar">↻</button>
+
+  <div class="address">
+    <input
+      id="url"
+      type="text"
+      placeholder="Digite um endereço HTTPS..."
+      autocomplete="url"
+      onkeydown="if(event.key==='Enter') abrir()"
+    >
+
+    <button class="go" onclick="abrir()">IR</button>
+  </div>
+
+  <button onclick="inicio()" title="Início">⌂</button>
+
 </div>
 
-<iframe id="pagina"></iframe>
+<div class="tools">
+  <span id="status">Página inicial</span>
 
-<div id="alternativa">
-  <p>Se o site não permitir visualização interna:</p>
-  <button onclick="novaAba()">Abrir em nova aba ↗</button>
+  <button onclick="novaAba()">
+    ↗ Abrir externamente
+  </button>
 </div>
+
+<main class="viewer">
+
+  <div class="home" id="home">
+    <h1>SOARES BROWSER</h1>
+    <p>Seu espaço para navegar na internet.</p>
+
+    <div class="shortcuts">
+      <button onclick="navegar('https://www.wikipedia.org')">
+        📚 Wikipedia
+      </button>
+
+      <button onclick="navegar('https://www.google.com')">
+        🔎 Google
+      </button>
+
+      <button onclick="navegar('https://www.youtube.com')">
+        ▶ YouTube
+      </button>
+    </div>
+  </div>
+
+  <iframe
+    id="pagina"
+    title="Navegador integrado"
+    referrerpolicy="no-referrer">
+  </iframe>
+
+</main>
+
+<footer>
+  SOARES BROWSER © 2026 — Navegador Web
+</footer>
 
 <script>
-let endereco = "";
 
-function validar() {
-  let valor = document.getElementById("url").value.trim();
+const campo = document.getElementById("url");
+const pagina = document.getElementById("pagina");
+const home = document.getElementById("home");
+const status = document.getElementById("status");
 
-  if (!valor) return false;
+let enderecoAtual = "";
+
+function validarEndereco(valor) {
+
+  valor = valor.trim();
+
+  if (!valor) return null;
 
   if (!/^https?:\/\//i.test(valor)) {
     valor = "https://" + valor;
   }
 
   try {
-    let link = new URL(valor);
+    const link = new URL(valor);
 
-    if (!["http:", "https:"].includes(link.protocol))
-      return false;
+    if (
+      link.protocol !== "https:" &&
+      link.protocol !== "http:"
+    ) return null;
 
-    endereco = link.href;
-    return true;
+    return link.href;
 
   } catch {
-    return false;
+    return null;
   }
+}
+
+function navegar(link) {
+
+  const endereco = validarEndereco(link);
+
+  if (!endereco) {
+    alert("Endereço inválido!");
+    return;
+  }
+
+  enderecoAtual = endereco;
+  campo.value = endereco;
+
+  home.style.display = "none";
+  status.textContent = "Carregando página...";
+
+  pagina.src = endereco;
 }
 
 function abrir() {
-  if (!validar()) {
-    alert("Link inválido!");
-    return;
-  }
+  navegar(campo.value);
+}
 
-  document.getElementById("pagina").src = endereco;
+function inicio() {
+
+  pagina.src = "about:blank";
+  campo.value = "";
+  enderecoAtual = "";
+
+  home.style.display = "flex";
+  status.textContent = "Página inicial";
+}
+
+function recarregar() {
+
+  if (enderecoAtual) {
+    pagina.src = enderecoAtual;
+    status.textContent = "Atualizando...";
+  }
+}
+
+function voltar() {
+  try {
+    pagina.contentWindow.history.back();
+  } catch(e) {
+    status.textContent = "Não foi possível voltar";
+  }
+}
+
+function avancar() {
+  try {
+    pagina.contentWindow.history.forward();
+  } catch(e) {
+    status.textContent = "Não foi possível avançar";
+  }
 }
 
 function novaAba() {
-  if (!validar()) {
-    alert("o Botão logo abaixo leva a um site exótico");
+
+  const endereco = validarEndereco(campo.value);
+
+  if (!endereco) {
+    alert("Digite um endereço válido!");
     return;
   }
 
-  window.open(endereco, "_blank", "noopener,noreferrer");
+  window.open(
+    endereco,
+    "_blank",
+    "noopener,noreferrer"
+  );
 }
+
+pagina.addEventListener("load", () => {
+  status.textContent = "Navegação carregada";
+});
+
 </script>
 
 </body>

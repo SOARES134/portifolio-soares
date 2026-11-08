@@ -4,269 +4,876 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Soares Media Gallery</title>
+<meta name="theme-color" content="#09090b">
+<title>SOARES MEDIA</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-* { box-sizing: border-box; }
-
+:root {
+  --bg:#09090b;
+  --panel:#151519;
+  --panel2:#202027;
+  --text:#f5f5f5;
+  --muted:#a1a1aa;
+  --accent:#8b5cf6;
+  --border:#303039;
+}
+* {box-sizing:border-box}
 body {
-  margin: 0;
-  background: #10131c;
-  color: white;
-  font-family: Arial, sans-serif;
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Arial,sans-serif;
 }
-
+button,input,textarea {font:inherit}
+button {cursor:pointer}
 header {
-  padding: 24px;
-  background: #191e2b;
-  text-align: center;
+  position:sticky;top:0;z-index:5;
+  background:#101014ed;backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--border);
+  padding:16px;
 }
-
-header h1 {
-  margin: 0;
-  color: #7889ff;
+.top {
+  max-width:1050px;margin:auto;display:flex;
+  align-items:center;justify-content:space-between;gap:12px;
 }
-
-main {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
-}
-
-.painel {
-  background: #1b2130;
-  border: 1px solid #30394d;
-  border-radius: 15px;
-  padding: 18px;
-  margin-bottom: 25px;
-}
-
-input {
-  width: 100%;
-  padding: 13px;
-  border-radius: 8px;
-  border: 1px solid #3a4258;
-  background: #101722;
-  color: white;
-  margin: 8px 0;
-}
-
+.logo {font-size:21px;font-weight:900;letter-spacing:1px}
+.logo span {color:var(--accent)}
+nav {display:flex;gap:8px;flex-wrap:wrap}
 button {
-  padding: 12px 16px;
-  border: none;
-  border-radius: 8px;
-  background: #5865f2;
-  color: white;
-  cursor: pointer;
-  margin-top: 7px;
+  border:0;border-radius:10px;padding:11px 15px;
+  background:var(--panel2);color:white;
 }
-
-button:hover {
-  background: #7481ff;
+button.primary {background:var(--accent);font-weight:bold}
+button.danger {background:#7f1d1d}
+button:disabled {opacity:.5}
+main {max-width:1050px;margin:25px auto;padding:0 15px}
+.panel {
+  background:var(--panel);border:1px solid var(--border);
+  border-radius:17px;padding:20px;margin-bottom:18px;
 }
-
-.upload {
-  display: block;
-  padding: 16px;
-  border: 2px dashed #5865f2;
-  border-radius: 10px;
-  text-align: center;
-  cursor: pointer;
-  margin-top: 12px;
+h2,h3 {margin-top:0}
+.muted {color:var(--muted)}
+input,textarea {
+  width:100%;padding:13px;margin:7px 0;
+  color:white;background:#0d0d11;
+  border:1px solid var(--border);border-radius:10px;
 }
-
-.upload input {
-  display: none;
+textarea {resize:vertical;min-height:80px}
+.hidden {display:none!important}
+.auth {max-width:430px;margin:45px auto}
+.auth button {width:100%;margin-top:8px}
+.post {overflow:hidden}
+.post-head {
+  display:flex;align-items:center;gap:10px;margin-bottom:13px;
 }
-
-.galeria {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 15px;
+.avatar {
+  width:42px;height:42px;border-radius:50%;
+  object-fit:cover;background:var(--panel2);
 }
-
-.item {
-  background: #1b2130;
-  border: 1px solid #30394d;
-  border-radius: 12px;
-  overflow: hidden;
+.post-media {
+  width:100%;max-height:650px;object-fit:contain;
+  background:#050505;border-radius:12px;
 }
-
-.item img,
-.item video {
-  width: 100%;
-  height: 190px;
-  object-fit: cover;
-  display: block;
-  background: #080a10;
+.actions {display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.profile-head {
+  display:flex;gap:18px;align-items:center;flex-wrap:wrap;
 }
-
-.acoes {
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.profile-avatar {
+  width:90px;height:90px;border-radius:50%;object-fit:cover;
+  background:var(--panel2);
 }
-
-.acoes button {
-  background: #d94455;
+.stats {display:flex;gap:20px;margin:15px 0}
+.stat {cursor:pointer}
+.stat b {display:block;font-size:20px}
+.grid {
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
 }
-
-small {
-  color: #9ba6bd;
+.grid img,.grid video {
+  width:100%;aspect-ratio:1;object-fit:cover;
+  background:#111;border-radius:9px;
 }
-
+.comment {
+  padding:10px 0;border-bottom:1px solid var(--border);
+}
+.search-result {
+  display:flex;align-items:center;gap:12px;
+  padding:10px 0;border-bottom:1px solid var(--border);
+}
+#notice {margin:10px 0;color:#c4b5fd;white-space:pre-wrap}
+footer {text-align:center;color:var(--muted);padding:30px}
+a {color:#c4b5fd}
+@media(max-width:600px) {
+  .top {align-items:flex-start;flex-direction:column}
+  nav {width:100%}
+  nav button {flex:1;padding:10px 5px}
+  .grid {grid-template-columns:repeat(2,1fr)}
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>📸 SOARES MEDIA</h1>
-  <p>Sua galeria de fotos e vídeos</p>
+  <div class="top">
+    <div class="logo">SOARES <span>MEDIA</span></div>
+    <nav>
+      <button onclick="showPage('feed')">Início</button>
+      <button onclick="showPage('search')">Buscar</button>
+      <button onclick="showPage('profile')">Meu perfil</button>
+      <button id="loginNav" onclick="showPage('auth')">Entrar</button>
+      <button id="logoutBtn" class="hidden" onclick="logout()">Sair</button>
+    </nav>
+  </div>
 </header>
 
 <main>
+  <div id="notice"></div>
 
-<section class="painel">
+  <!-- AUTENTICAÇÃO -->
+  <section id="auth" class="auth panel hidden">
+    <h2 id="authTitle">Entrar na conta</h2>
 
-  <h2>Adicionar mídia</h2>
+    <div id="signupFields" class="hidden">
+      <input id="displayName" placeholder="Seu nome">
+      <input id="username" placeholder="Nome de usuário (ex: soares123)">
+    </div>
 
-  <label class="upload">
-    📁 Escolher fotos e vídeos
-    <input
-      type="file"
-      id="arquivos"
-      accept="image/*,video/*"
-      multiple
-    >
-  </label>
+    <input id="email" type="email" placeholder="Seu e-mail">
+    <input id="password" type="password" placeholder="Sua senha">
 
-  <h3>Ou adicionar por link</h3>
+    <button class="primary" onclick="authenticate()" id="authButton">
+      Entrar
+    </button>
 
-  <input
-    type="url"
-    id="link"
-    placeholder="Cole o link da imagem ou vídeo"
-  >
+    <button onclick="toggleAuth()" id="toggleAuthButton">
+      Não tem conta? Criar agora
+    </button>
 
-  <button onclick="adicionarLink()">
-    Adicionar link
-  </button>
+    <button onclick="resetPassword()">Esqueci minha senha</button>
+    <p class="muted">Ao criar uma conta, você concorda em usar a plataforma com respeito e responsabilidade.</p>
+  </section>
 
-  <p><small>
-    Aceita imagens e vídeos com endereço direto.
-  </small></p>
+  <!-- FEED -->
+  <section id="feed">
+    <div class="panel">
+      <h2>🌎 Feed da comunidade</h2>
+      <p class="muted">Descubra o que as pessoas estão compartilhando.</p>
+      <button onclick="loadFeed()">↻ Atualizar publicações</button>
+    </div>
 
-</section>
+    <div id="composer" class="panel hidden">
+      <h3>Compartilhar publicação</h3>
+      <textarea id="caption" maxlength="1000"
+        placeholder="O que você deseja compartilhar?"></textarea>
+      <input id="mediaFile" type="file"
+        accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm">
+      <button class="primary" onclick="createPost()">Publicar</button>
+      <p class="muted">Fotos e vídeos de até 50 MB.</p>
+    </div>
 
-<h2>Minha galeria</h2>
+    <div id="feedPosts"></div>
+  </section>
 
-<div class="galeria" id="galeria"></div>
+  <!-- BUSCA -->
+  <section id="search" class="hidden">
+    <div class="panel">
+      <h2>🔎 Encontrar pessoas</h2>
+      <input id="searchInput" placeholder="Buscar por nome de usuário...">
+      <button class="primary" onclick="searchUsers()">Buscar</button>
+      <div id="searchResults"></div>
+    </div>
+  </section>
 
+  <!-- PERFIL -->
+  <section id="profile" class="hidden">
+    <div class="panel">
+      <div id="profileContent">
+        <p>Entre na sua conta para visualizar seu perfil.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERFIL DE OUTRO USUÁRIO -->
+  <section id="userProfile" class="hidden">
+    <div class="panel" id="userProfileContent"></div>
+  </section>
+
+  <!-- LISTA DE SEGUIDORES -->
+  <section id="people" class="hidden">
+    <div class="panel">
+      <button onclick="showPage('profile')">← Voltar</button>
+      <h2 id="peopleTitle">Pessoas</h2>
+      <div id="peopleList"></div>
+    </div>
+  </section>
 </main>
 
+<footer>SOARES MEDIA © 2026 — Compartilhe momentos.</footer>
+
 <script>
+// ======================================
+// CONFIGURAÇÃO DO SUPABASE
+// ======================================
 
-const galeria = document.getElementById("galeria");
+const SUPABASE_URL = "COLOQUE_AQUI_SUA_PROJECT_URL";
+const SUPABASE_KEY = "COLOQUE_AQUI_SUA_PUBLISHABLE_KEY";
 
-function criarItem(url, tipo, temporario = false) {
+const client = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
-  const item = document.createElement("div");
-  item.className = "item";
+let currentUser = null;
+let isSignup = false;
+let openedProfile = null;
 
-  let midia;
+// ======================================
+// UTILIDADES
+// ======================================
 
-  if (tipo.startsWith("image/")) {
-    midia = document.createElement("img");
-    midia.alt = "Imagem da galeria";
-  } else {
-    midia = document.createElement("video");
-    midia.controls = true;
-    midia.playsInline = true;
-  }
-
-  midia.src = url;
-
-  const acoes = document.createElement("div");
-  acoes.className = "acoes";
-
-  const texto = document.createElement("small");
-  texto.textContent = tipo.startsWith("image/")
-    ? "📸 Fotografia"
-    : "🎬 Vídeo";
-
-  const remover = document.createElement("button");
-  remover.textContent = "Remover";
-
-  remover.onclick = () => {
-    item.remove();
-
-    if (temporario) {
-      URL.revokeObjectURL(url);
-    }
-  };
-
-  acoes.append(texto, remover);
-  item.append(midia, acoes);
-  galeria.prepend(item);
+function notice(message) {
+  document.getElementById("notice").textContent = message;
 }
 
-document.getElementById("arquivos")
-.addEventListener("change", function() {
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
+  })[char]);
+}
 
-  Array.from(this.files).forEach(file => {
+function showPage(page) {
+  ["auth","feed","search","profile","userProfile","people"]
+    .forEach(id => document.getElementById(id).classList.add("hidden"));
 
-    if (!file.type.startsWith("image/") &&
-        !file.type.startsWith("video/")) return;
+  document.getElementById(page).classList.remove("hidden");
 
-    const url = URL.createObjectURL(file);
+  if (page === "feed") loadFeed();
+  if (page === "profile") loadMyProfile();
+}
 
-    criarItem(url, file.type, true);
+// ======================================
+// LOGIN E CADASTRO
+// ======================================
 
+function toggleAuth() {
+  isSignup = !isSignup;
+
+  document.getElementById("signupFields").classList.toggle("hidden",!isSignup);
+  document.getElementById("authTitle").textContent =
+    isSignup ? "Criar conta" : "Entrar na conta";
+  document.getElementById("authButton").textContent =
+    isSignup ? "Cadastrar" : "Entrar";
+  document.getElementById("toggleAuthButton").textContent =
+    isSignup ? "Já tenho uma conta" : "Não tem conta? Criar agora";
+}
+
+async function authenticate() {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  if (!email || !password) return notice("Preencha e-mail e senha.");
+
+  notice("Processando...");
+
+  if (isSignup) {
+    const username = document.getElementById("username").value
+      .trim().toLowerCase();
+    const displayName = document.getElementById("displayName").value.trim();
+
+    if (!/^[a-z0-9_]{3,24}$/.test(username))
+      return notice("Use um nome de usuário de 3 a 24 caracteres: letras, números e _.");
+
+    if (password.length < 8)
+      return notice("Use uma senha com pelo menos 8 caracteres.");
+
+    const {error} = await client.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          username,
+          display_name: displayName || username
+        }
+      }
+    });
+
+    if (error) return notice(error.message);
+
+    notice("Cadastro enviado! Confira seu e-mail para confirmar a conta, se solicitado.");
+  } else {
+    const {error} = await client.auth.signInWithPassword({
+      email,password
+    });
+
+    if (error) return notice(error.message);
+
+    notice("Login realizado!");
+    showPage("feed");
+  }
+}
+
+async function logout() {
+  const {error} = await client.auth.signOut();
+  if (error) return notice(error.message);
+  notice("Você saiu da conta.");
+  showPage("feed");
+}
+
+async function resetPassword() {
+  const email = document.getElementById("email").value.trim();
+  if (!email) return notice("Digite seu e-mail primeiro.");
+
+  const {error} = await client.auth.resetPasswordForEmail(email, {
+    redirectTo: location.origin + location.pathname
   });
 
-  this.value = "";
+  notice(error ? error.message : "Confira seu e-mail para redefinir a senha.");
+}
 
+// ======================================
+// ESTADO DA SESSÃO
+// ======================================
+
+async function refreshSession() {
+  const {data} = await client.auth.getSession();
+  currentUser = data.session?.user || null;
+  updateNavigation();
+}
+
+function updateNavigation() {
+  document.getElementById("loginNav").classList.toggle("hidden",!!currentUser);
+  document.getElementById("logoutBtn").classList.toggle("hidden",!currentUser);
+  document.getElementById("composer").classList.toggle("hidden",!currentUser);
+}
+
+client.auth.onAuthStateChange((_event,session) => {
+  currentUser = session?.user || null;
+  updateNavigation();
 });
 
-function adicionarLink() {
 
-  const campo = document.getElementById("link");
-  const valor = campo.value.trim();
+// ======================================
+// PUBLICAÇÕES
+// ======================================
 
-  if (!valor) return;
+async function loadFeed() {
+  const container = document.getElementById("feedPosts");
+  container.innerHTML = "<p class='muted'>Carregando publicações...</p>";
 
-  try {
+  const {data,error} = await client
+    .from("posts")
+    .select("*, profiles(username,display_name,avatar_url)")
+    .order("created_at",{ascending:false})
+    .limit(50);
 
-    const url = new URL(valor);
+  if (error) {
+    container.textContent = error.message;
+    return;
+  }
 
-    if (!["https:", "http:"].includes(url.protocol)) {
-      throw new Error();
-    }
+  if (!data.length) {
+    container.innerHTML = "<div class='panel'>Ainda não existem publicações. Seja o primeiro!</div>";
+    return;
+  }
 
-    const extensao = url.pathname.toLowerCase();
+  container.innerHTML = "";
 
-    let tipo;
+  for (const post of data) {
+    const card = document.createElement("article");
+    card.className = "panel post";
 
-    if (/\.(jpg|jpeg|png|gif|webp|avif|svg)$/.test(extensao)) {
-      tipo = "image/external";
-    } else if (/\.(mp4|webm|ogg|mov)$/.test(extensao)) {
-      tipo = "video/external";
-    } else {
-      alert("Use um link direto de imagem ou vídeo.");
-      return;
-    }
+    const profile = post.profiles || {};
+    const username = escapeHTML(profile.username || "usuário");
+    const displayName = escapeHTML(profile.display_name || username);
+    const caption = escapeHTML(post.caption);
+    const avatar = profile.avatar_url
+      ? escapeHTML(profile.avatar_url)
+      : "";
 
-    criarItem(valor, tipo);
-    campo.value = "";
+    const media = post.media_type === "video"
+      ? `<video class="post-media" src="${escapeHTML(post.media_url)}" controls playsinline preload="metadata"></video>`
+      : `<img class="post-media" src="${escapeHTML(post.media_url)}" alt="Publicação">`;
 
-  } catch {
-    alert("Link inválido!");
+    card.innerHTML = `
+      <div class="post-head">
+        <img class="avatar" src="${avatar || 'https://placehold.co/80x80/202027/ffffff?text=S'}" alt="">
+        <div>
+          <b>${displayName}</b><br>
+          <span class="muted">@${username}</span>
+        </div>
+        <button style="margin-left:auto" data-profile="${post.user_id}">Ver perfil</button>
+      </div>
+      ${media}
+      <p>${caption}</p>
+      <div class="actions">
+        <button data-like="${post.id}">❤️ Curtir</button>
+        <button data-comments="${post.id}">💬 Comentários</button>
+        <button data-report="${post.id}">🚩 Denunciar</button>
+      </div>
+      <div id="comments-${post.id}"></div>
+    `;
+
+    card.querySelector("[data-profile]").onclick =
+      () => openUserProfile(post.user_id);
+    card.querySelector("[data-like]").onclick =
+      () => likePost(post.id);
+    card.querySelector("[data-comments]").onclick =
+      () => showComments(post.id);
+    card.querySelector("[data-report]").onclick =
+      () => reportPost(post.id);
+
+    container.appendChild(card);
   }
 }
 
-</script>
+async function createPost() {
+  if (!currentUser) return notice("Entre na sua conta para publicar.");
 
+  const file = document.getElementById("mediaFile").files[0];
+  const caption = document.getElementById("caption").value.trim();
+
+  if (!file) return notice("Escolha uma foto ou vídeo.");
+  if (file.size > 50 * 1024 * 1024)
+    return notice("O arquivo ultrapassa 50 MB.");
+
+  const allowed = [
+    "image/jpeg","image/png","image/webp","image/gif",
+    "video/mp4","video/webm"
+  ];
+
+  if (!allowed.includes(file.type))
+    return notice("Formato de arquivo não permitido.");
+
+  notice("Enviando mídia...");
+
+  const extension = file.name.split(".").pop().toLowerCase();
+  const path = `${currentUser.id}/${crypto.randomUUID()}.${extension}`;
+
+  const {error:uploadError} = await client.storage
+    .from("soares-media")
+    .upload(path,file,{
+      contentType:file.type,
+      upsert:false
+    });
+
+  if (uploadError) return notice(uploadError.message);
+
+  const {data:urlData} = client.storage
+    .from("soares-media")
+    .getPublicUrl(path);
+
+  const {error} = await client.from("posts").insert({
+    user_id:currentUser.id,
+    caption,
+    media_url:urlData.publicUrl,
+    media_type:file.type.startsWith("video/") ? "video" : "image"
+  });
+
+  if (error) return notice(error.message);
+
+  document.getElementById("caption").value = "";
+  document.getElementById("mediaFile").value = "";
+
+  notice("Publicação enviada com sucesso!");
+  loadFeed();
+}
+
+// ======================================
+// CURTIDAS
+// ======================================
+
+async function likePost(postId) {
+  if (!currentUser) return notice("Entre para curtir.");
+
+  const {data:existing,error:checkError} = await client
+    .from("likes")
+    .select("post_id")
+    .eq("post_id",postId)
+    .eq("user_id",currentUser.id)
+    .maybeSingle();
+
+  if (checkError) return notice(checkError.message);
+
+  let result;
+
+  if (existing) {
+    result = await client.from("likes")
+      .delete()
+      .eq("post_id",postId)
+      .eq("user_id",currentUser.id);
+  } else {
+    result = await client.from("likes")
+      .insert({post_id:postId,user_id:currentUser.id});
+  }
+
+  notice(result.error ? result.error.message :
+    existing ? "Curtida removida." : "Você curtiu a publicação!");
+}
+
+// ======================================
+// COMENTÁRIOS
+// ======================================
+
+async function showComments(postId) {
+  const box = document.getElementById(`comments-${postId}`);
+
+  const {data,error} = await client
+    .from("comments")
+    .select("*,profiles(username,display_name)")
+    .eq("post_id",postId)
+    .order("created_at",{ascending:true})
+    .limit(50);
+
+  if (error) return notice(error.message);
+
+  box.innerHTML = `
+    <h3>Comentários</h3>
+    ${data.map(c => `
+      <div class="comment">
+        <b>@${escapeHTML(c.profiles?.username || "usuário")}</b>
+        <p>${escapeHTML(c.content)}</p>
+      </div>
+    `).join("")}
+    ${currentUser ? `
+      <textarea id="comment-input-${postId}" maxlength="1000"
+        placeholder="Escreva um comentário..."></textarea>
+      <button class="primary" id="comment-send-${postId}">Enviar</button>
+    ` : "<p class='muted'>Entre para comentar.</p>"}
+  `;
+
+  const send = document.getElementById(`comment-send-${postId}`);
+  if (send) send.onclick = () => addComment(postId);
+}
+
+async function addComment(postId) {
+  const input = document.getElementById(`comment-input-${postId}`);
+  const content = input.value.trim();
+
+  if (!content) return notice("Digite um comentário.");
+
+  const {error} = await client.from("comments").insert({
+    post_id:postId,
+    user_id:currentUser.id,
+    content
+  });
+
+  if (error) return notice(error.message);
+
+  notice("Comentário enviado!");
+  showComments(postId);
+}
+
+// ======================================
+// DENÚNCIAS
+// ======================================
+
+async function reportPost(postId) {
+  if (!currentUser) return notice("Entre para denunciar.");
+
+  const reason = prompt("Explique o motivo da denúncia:");
+  if (!reason || !reason.trim()) return;
+
+  const {error} = await client.from("reports").insert({
+    reporter_id:currentUser.id,
+    post_id:postId,
+    reason:reason.trim()
+  });
+
+  notice(error ? error.message : "Denúncia enviada.");
+}
+
+// ======================================
+// MEU PERFIL
+// ======================================
+
+async function getProfile(userId) {
+  const {data,error} = await client
+    .from("profiles")
+    .select("*")
+    .eq("id",userId)
+    .maybeSingle();
+
+  if (error) throw error;
+  return data;
+}
+
+async function loadMyProfile() {
+  const box = document.getElementById("profileContent");
+
+  if (!currentUser) {
+    box.innerHTML = "<h2>Meu perfil</h2><p>Entre para visualizar seu perfil.</p>";
+    return;
+  }
+
+  try {
+    const profile = await getProfile(currentUser.id);
+    await renderProfile(box,profile,true);
+  } catch (error) {
+    notice(error.message);
+  }
+}
+
+async function renderProfile(box,profile,isMine) {
+  if (!profile) return;
+
+  const id = profile.id;
+
+  const [{count:followers},{count:following},{data:posts}] =
+    await Promise.all([
+      client.from("follows").select("*",{count:"exact",head:true})
+        .eq("following_id",id),
+      client.from("follows").select("*",{count:"exact",head:true})
+        .eq("follower_id",id),
+      client.from("posts").select("*")
+        .eq("user_id",id).order("created_at",{ascending:false})
+    ]);
+
+  box.innerHTML = `
+    <div class="profile-head">
+      <img class="profile-avatar"
+        src="${escapeHTML(profile.avatar_url || 'https://placehold.co/120x120/202027/ffffff?text=S')}"
+        alt="">
+      <div>
+        <h2>${escapeHTML(profile.display_name)}</h2>
+        <p class="muted">@${escapeHTML(profile.username)}</p>
+      </div>
+    </div>
+
+    <p>${escapeHTML(profile.bio || "Sem biografia.")}</p>
+
+    <div class="stats">
+      <div class="stat">
+        <b>${posts.length}</b> publicações
+      </div>
+      <div class="stat" data-people="followers">
+        <b>${followers || 0}</b> seguidores
+      </div>
+      <div class="stat" data-people="following">
+        <b>${following || 0}</b> seguindo
+      </div>
+    </div>
+
+    ${isMine ? `
+      <h3>Editar perfil</h3>
+      <input id="editDisplay" value="${escapeHTML(profile.display_name)}"
+        placeholder="Nome">
+      <input id="editUsername" value="${escapeHTML(profile.username)}"
+        placeholder="Nome de usuário">
+      <textarea id="editBio" maxlength="300"
+        placeholder="Biografia">${escapeHTML(profile.bio || "")}</textarea>
+      <input id="editAvatar" placeholder="URL pública da foto de perfil"
+        value="${escapeHTML(profile.avatar_url || "")}">
+      <button class="primary" onclick="saveProfile()">Salvar perfil</button>
+    ` : `
+      <button class="primary" id="followButton">Seguir</button>
+    `}
+
+    <h3 style="margin-top:25px">Publicações</h3>
+    <div class="grid">
+      ${posts.map(p => p.media_type === "video"
+        ? `<video src="${escapeHTML(p.media_url)}" controls></video>`
+        : `<img src="${escapeHTML(p.media_url)}" alt="Publicação">`
+      ).join("")}
+    </div>
+  `;
+
+  box.querySelector('[data-people="followers"]').onclick =
+    () => showPeople(id,"followers");
+  box.querySelector('[data-people="following"]').onclick =
+    () => showPeople(id,"following");
+
+  if (!isMine) {
+    const button = box.querySelector("#followButton");
+    const {data:relation} = await client.from("follows")
+      .select("follower_id")
+      .eq("follower_id",currentUser.id)
+      .eq("following_id",id)
+      .maybeSingle();
+
+    button.textContent = relation ? "Deixar de seguir" : "Seguir";
+    button.onclick = () => toggleFollow(id,!!relation);
+  }
+}
+
+async function saveProfile() {
+  const username = document.getElementById("editUsername").value
+    .trim().toLowerCase();
+
+  if (!/^[a-z0-9_]{3,24}$/.test(username))
+    return notice("Nome de usuário inválido.");
+
+  const updates = {
+    display_name:document.getElementById("editDisplay").value.trim(),
+    username,
+    bio:document.getElementById("editBio").value.trim(),
+    avatar_url:document.getElementById("editAvatar").value.trim() || null
+  };
+
+  const {error} = await client.from("profiles")
+    .update(updates).eq("id",currentUser.id);
+
+  notice(error ? error.message : "Perfil atualizado!");
+  if (!error) loadMyProfile();
+}
+
+// ======================================
+// SEGUIR E DEIXAR DE SEGUIR
+// ======================================
+
+async function toggleFollow(targetId,isFollowing) {
+  if (!currentUser) return notice("Entre para seguir pessoas.");
+
+  if (isFollowing) {
+    const {error} = await client.from("follows").delete()
+      .eq("follower_id",currentUser.id)
+      .eq("following_id",targetId);
+    if (error) return notice(error.message);
+  } else {
+    const {error} = await client.from("follows").insert({
+      follower_id:currentUser.id,
+      following_id:targetId
+    });
+    if (error) return notice(error.message);
+  }
+
+  notice(isFollowing ? "Você deixou de seguir." : "Agora você está seguindo!");
+  openUserProfile(targetId);
+}
+
+// ======================================
+// PERFIS DE OUTRAS PESSOAS
+// ======================================
+
+async function openUserProfile(userId) {
+  if (currentUser?.id === userId) return showPage("profile");
+
+  openedProfile = userId;
+  showPage("userProfile");
+
+  const box = document.getElementById("userProfileContent");
+  box.innerHTML = "<p>Carregando perfil...</p>";
+
+  try {
+    const profile = await getProfile(userId);
+    await renderProfile(box,profile,false);
+  } catch (error) {
+    notice(error.message);
+  }
+}
+
+// ======================================
+// BUSCAR USUÁRIOS
+// ======================================
+
+async function searchUsers() {
+  const term = document.getElementById("searchInput").value.trim();
+  const box = document.getElementById("searchResults");
+
+  if (term.length < 2)
+    return notice("Digite pelo menos dois caracteres.");
+
+  const {data,error} = await client.from("profiles")
+    .select("id,username,display_name,avatar_url")
+    .ilike("username",`%${term}%`)
+    .limit(30);
+
+  if (error) return notice(error.message);
+
+  box.innerHTML = data.map(user => `
+    <div class="search-result">
+      <img class="avatar"
+        src="${escapeHTML(user.avatar_url || 'https://placehold.co/80x80/202027/ffffff?text=S')}">
+      <div>
+        <b>${escapeHTML(user.display_name)}</b><br>
+        <span class="muted">@${escapeHTML(user.username)}</span>
+      </div>
+      <button style="margin-left:auto" data-user="${user.id}">Ver</button>
+    </div>
+  `).join("") || "<p>Nenhum usuário encontrado.</p>";
+
+  box.querySelectorAll("[data-user]").forEach(button => {
+    button.onclick = () => openUserProfile(button.dataset.user);
+  });
+}
+
+// ======================================
+// LISTAR SEGUIDORES / SEGUINDO
+// ======================================
+
+async function showPeople(userId,type) {
+  showPage("people");
+
+  const title = document.getElementById("peopleTitle");
+  const list = document.getElementById("peopleList");
+
+  title.textContent = type === "followers" ? "Seguidores" : "Seguindo";
+  list.innerHTML = "<p>Carregando...</p>";
+
+  let query = client.from("follows").select(
+    type === "followers" ? "follower_id" : "following_id"
+  );
+
+  query = type === "followers"
+    ? query.eq("following_id",userId)
+    : query.eq("follower_id",userId);
+
+  const {data,error} = await query.limit(100);
+  if (error) return notice(error.message);
+
+  const ids = data.map(item =>
+    type === "followers" ? item.follower_id : item.following_id
+  );
+
+  if (!ids.length) {
+    list.innerHTML = "<p class='muted'>Ainda não há pessoas nesta lista.</p>";
+    return;
+  }
+
+  const {data:profiles,error:profileError} = await client
+    .from("profiles")
+    .select("id,username,display_name,avatar_url")
+    .in("id",ids);
+
+  if (profileError) return notice(profileError.message);
+
+  list.innerHTML = profiles.map(person => `
+    <div class="search-result">
+      <img class="avatar"
+        src="${escapeHTML(person.avatar_url || 'https://placehold.co/80x80/202027/ffffff?text=S')}">
+      <div>
+        <b>${escapeHTML(person.display_name)}</b><br>
+        <span class="muted">@${escapeHTML(person.username)}</span>
+      </div>
+      <button style="margin-left:auto" data-user="${person.id}">Ver perfil</button>
+    </div>
+  `).join("");
+
+  list.querySelectorAll("[data-user]").forEach(button => {
+    button.onclick = () => openUserProfile(button.dataset.user);
+  });
+}
+
+// ======================================
+// INICIALIZAÇÃO
+// ======================================
+
+async function startApp() {
+  if (SUPABASE_URL.includes("COLOQUE_AQUI") ||
+      SUPABASE_KEY.includes("COLOQUE_AQUI")) {
+    notice("Configure a URL e a chave pública do Supabase no código.");
+    showPage("auth");
+    return;
+  }
+
+  await refreshSession();
+  showPage("feed");
+}
+
+startApp();
+</script>
 </body>
 </html>

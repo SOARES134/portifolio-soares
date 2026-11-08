@@ -1,535 +1,100 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#000000">
-    <title>OTÁVIO | Especialista Em Computação</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@300;500;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <style>
-        :root {
-            --bg-black:#000; --bg-card:#0d0d0d; --accent:#fff;
-            --gray:#888; --border:#1a1a1a;
-            --transition:all .4s cubic-bezier(.23,1,.32,1);
-        }
-        * {margin:0;padding:0;box-sizing:border-box;outline:none}
-        body {
-            background:var(--bg-black);color:white;
-            font-family:'Plus Jakarta Sans',sans-serif;
-            line-height:1.6;scroll-behavior:smooth;overflow-x:hidden
-        }
-        header {
-            position:fixed;top:0;width:100%;padding:18px 5%;
-            display:flex;justify-content:space-between;align-items:center;
-            gap:20px;background:rgba(0,0,0,.88);backdrop-filter:blur(15px);
-            border-bottom:1px solid var(--border);z-index:9999
-        }
-        .logo {font-family:'Syncopate',sans-serif;font-size:1.35rem;letter-spacing:-1px;color:white;white-space:nowrap}
-        nav ul {display:flex;gap:25px;list-style:none;align-items:center}
-        nav a {text-decoration:none;color:var(--gray);font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;transition:var(--transition)}
-        nav a:hover {color:white}
-        section {padding:120px 8%;min-height:80vh;display:flex;flex-direction:column;justify-content:center}
-        .section-tag {color:var(--gray);font-weight:800;letter-spacing:3px;margin-bottom:10px;display:block;text-transform:uppercase}
-        .section-title {font-family:'Syncopate',sans-serif;font-size:clamp(2rem,5vw,3.5rem);margin-bottom:50px}
-        #home {height:100vh;text-align:center;background:radial-gradient(circle at 50% 50%,#111 0%,#000 100%)}
-        #home h1 {font-family:'Syncopate',sans-serif;font-size:clamp(3rem,12vw,8rem);line-height:.9}
-        .status-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:40px}
-        .status-item {background:var(--bg-card);padding:30px;border:1px solid var(--border);border-radius:12px}
-        .status-item h4 {font-size:2rem;margin-bottom:5px}
-        .status-item p,.card-info p {color:var(--gray)}
-        .portfolio-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px}
-        .card {background:var(--bg-card);border-radius:16px;overflow:hidden;border:1px solid var(--border);transition:var(--transition)}
-        .card:hover {transform:translateY(-10px);border-color:#444}
-        .card-thumb {width:100%;aspect-ratio:16/9;background-size:cover;background-position:center}
-        .card-info {padding:30px}
-        .card-info h3 {margin-bottom:10px;font-size:1.4rem}
-        .card-info p {margin-bottom:25px;font-size:.95rem}
-        .btn-play {display:inline-flex;align-items:center;gap:10px;padding:12px 25px;background:white;color:black;font-weight:800;text-decoration:none;border-radius:8px;transition:var(--transition)}
-        .btn-play:hover {background:var(--gray)}
-        .services-list {display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-        .service-box {padding:40px;border:1px solid var(--border);border-radius:12px;transition:var(--transition)}
-        .service-box:hover {background:#fff;color:#000}
-        .service-box i {font-size:2rem;margin-bottom:20px}
-        .contact-wrapper {display:flex;flex-wrap:wrap;gap:50px;align-items:flex-start}
-        .social-big {display:flex;gap:20px;margin-top:30px}
-        .social-big a {width:60px;height:60px;background:var(--bg-card);display:flex;align-items:center;justify-content:center;border-radius:50%;color:white;font-size:1.5rem;border:1px solid var(--border);transition:var(--transition)}
-        .social-big a:hover {background:white;color:black;transform:rotate(15deg)}
-        .wa-float {position:fixed;bottom:40px;right:40px;background:#25d366;width:65px;height:65px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;color:white;box-shadow:0 10px 30px rgba(37,211,102,.3);z-index:999;transition:var(--transition)}
-        .wa-float:hover {transform:scale(1.1)}
-
-        /* Área da conta: adicionada sem alterar o conteúdo do portfólio */
-        .account-area {display:flex;align-items:center;gap:10px}
-        .account-button,.account-logout {
-            border:1px solid #333;background:#111;color:#fff;border-radius:9px;
-            padding:10px 13px;font:700 .78rem 'Plus Jakarta Sans',sans-serif;cursor:pointer
-        }
-        .account-button:hover,.account-logout:hover {background:#fff;color:#000}
-        .account-avatar {width:38px;height:38px;border-radius:50%;object-fit:cover;border:1px solid #555;display:none}
-        .account-name {font-size:.78rem;color:#ddd;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-        .modal-backdrop {
-            position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);
-            display:none;align-items:center;justify-content:center;padding:18px;z-index:20000
-        }
-        .modal-backdrop.open {display:flex}
-        .account-modal {
-            width:100%;max-width:430px;max-height:90vh;overflow:auto;
-            background:#101010;border:1px solid #303030;border-radius:18px;padding:25px;
-            box-shadow:0 20px 80px #000
-        }
-        .modal-top {display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-        .modal-top h2 {font-family:'Syncopate',sans-serif;font-size:1rem}
-        .modal-close {background:transparent;border:0;color:#aaa;font-size:1.5rem;cursor:pointer}
-        .account-modal label {display:block;color:#aaa;font-size:.8rem;margin:12px 0 5px}
-        .account-modal input {
-            width:100%;padding:13px;background:#050505;border:1px solid #333;
-            border-radius:9px;color:white;font:inherit
-        }
-        .modal-action {
-            width:100%;padding:13px;margin-top:13px;border:0;border-radius:9px;
-            background:white;color:black;font-weight:800;cursor:pointer
-        }
-        .modal-secondary {width:100%;padding:11px;margin-top:8px;border:1px solid #333;border-radius:9px;background:#171717;color:white;cursor:pointer}
-        .account-message {font-size:.83rem;color:#c7c7c7;margin-top:12px;min-height:20px;overflow-wrap:anywhere}
-        .profile-editor {display:none;border-top:1px solid #333;margin-top:18px;padding-top:18px}
-        .profile-preview {width:82px;height:82px;border-radius:50%;object-fit:cover;background:#222;display:block;margin:8px auto 14px;border:2px solid #555}
-        .hidden {display:none!important}
-
-        @media(max-width:900px) {
-            header {padding:14px 4%;flex-wrap:wrap}
-            nav ul {gap:13px;flex-wrap:wrap}
-            nav a {font-size:.7rem}
-            .account-area {margin-left:auto}
-        }
-        @media(max-width:600px) {
-            header {position:absolute;align-items:flex-start}
-            nav {width:100%;order:3}
-            nav ul {justify-content:center;gap:12px}
-            nav a {font-size:.65rem}
-            section {padding:100px 5% 80px}
-            #home {min-height:100vh}
-            .account-name {display:none}
-            .wa-float {bottom:20px;right:20px;width:55px;height:55px}
-            .portfolio-grid {grid-template-columns:1fr}
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090909">
+<title>SOARES MUSIC — Seu som, seu espaço</title>
+<style>
+:root{--bg:#080909;--panel:#121414;--panel2:#191d1c;--green:#1ed760;--text:#f5f7f5;--muted:#a4aaa6}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#173d2a 0,transparent 38%),var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;min-height:100vh}
+a{color:inherit;text-decoration:none}.layout{display:grid;grid-template-columns:245px 1fr;min-height:100vh}
+aside{background:#050606;border-right:1px solid #202522;padding:28px 18px;position:sticky;top:0;height:100vh}
+.logo{font-weight:950;letter-spacing:2px;font-size:22px}.logo span{color:var(--green)}.sublogo{color:var(--muted);font-size:10px;letter-spacing:3px;margin-top:5px}
+nav{display:grid;gap:9px;margin-top:42px}nav a{padding:13px 14px;border-radius:10px;color:#b9c0bb;font-weight:700;font-size:14px}nav a:hover,nav a.active{background:#17251c;color:var(--green)}
+.side-note{position:absolute;bottom:26px;left:22px;right:22px;color:#777f79;font-size:11px;line-height:1.6}
+main{padding:30px clamp(18px,4vw,58px) 110px;max-width:1500px;width:100%;margin:auto}
+.top{display:flex;align-items:center;justify-content:space-between;gap:15px}.eyebrow{font-size:11px;letter-spacing:3px;color:var(--green);font-weight:800}.top a{font-size:13px;color:#c5ccc7;border:1px solid #333b36;padding:10px 14px;border-radius:30px}
+h1{font-size:clamp(36px,6vw,68px);line-height:.98;letter-spacing:-3px;margin:28px 0 12px;font-weight:950}h1 span{color:var(--green)}.intro{color:var(--muted);max-width:600px;line-height:1.65;font-size:14px}
+.hero{margin-top:28px;padding:28px;border:1px solid #254331;border-radius:22px;background:linear-gradient(115deg,#142b1d,#101512 65%,#1c2520);display:flex;align-items:center;justify-content:space-between;gap:20px;overflow:hidden}
+.hero strong{font-size:clamp(22px,3vw,34px);display:block;margin-bottom:8px}.hero p{color:#c0c9c2;margin:0 0 18px;font-size:13px}.pill{display:inline-block;background:var(--green);color:#071009;padding:11px 17px;border-radius:30px;font-size:12px;font-weight:900}.disc{width:125px;height:125px;flex:0 0 125px;border-radius:50%;background:repeating-radial-gradient(circle,#171b19 0 3px,#303732 4px 5px);display:grid;place-items:center;box-shadow:0 0 40px #1ed76022}.disc:after{content:"";width:34px;height:34px;border-radius:50%;background:var(--green);border:8px solid #172019}
+.section{margin-top:42px;scroll-margin-top:25px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:16px}.section h2{font-size:23px;margin:0;letter-spacing:-.7px}.section-head p{font-size:12px;color:var(--muted);margin:0}
+.artists{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.artist{background:var(--panel);border:1px solid #252b27;border-radius:18px;padding:17px;min-width:0}.artist-top{display:flex;align-items:center;gap:13px;margin-bottom:14px}.avatar{width:52px;height:52px;border-radius:13px;display:grid;place-items:center;font-size:20px;font-weight:950;background:linear-gradient(135deg,#285a3b,#111)}.artist h3{margin:0 0 4px;font-size:18px}.artist small{color:var(--muted)}iframe{width:100%;border:0;border-radius:12px;background:#202522}.spotify-link{display:inline-block;margin-top:12px;color:var(--green);font-size:12px;font-weight:800}
+.funk{background:linear-gradient(120deg,#261a31,#15131a);border:1px solid #44314e;border-radius:18px;padding:22px;display:flex;align-items:center;justify-content:space-between;gap:20px}.funk h3{font-size:21px;margin:0 0 7px}.funk p{margin:0;color:#c0b7c7;font-size:13px;line-height:1.5}.funk .pill{background:#c98aff}
+.searchbox{display:flex;gap:10px;margin-top:22px}.searchbox input{width:100%;background:#111614;border:1px solid #303a33;border-radius:12px;padding:14px;color:white;outline:none}.searchbox input:focus{border-color:var(--green)}.searchbox button{background:var(--green);border:0;border-radius:12px;padding:0 18px;font-weight:900;cursor:pointer}
+.quick{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.quick a{font-size:12px;color:#d2d8d3;background:#171c19;border:1px solid #2b342e;padding:9px 12px;border-radius:30px}
+footer{border-top:1px solid #252b27;margin-top:50px;padding-top:20px;color:#777f79;font-size:11px;line-height:1.6}
+.player-note{position:fixed;bottom:0;left:245px;right:0;background:#101512ed;backdrop-filter:blur(15px);border-top:1px solid #2b352e;padding:13px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;z-index:5}.player-note b{font-size:13px}.player-note span{display:block;color:var(--muted);font-size:11px;margin-top:3px}.player-note a{color:var(--green);font-size:12px;font-weight:800}
+@media(max-width:800px){.layout{display:block}aside{height:auto;position:relative;padding:18px;border-right:0;border-bottom:1px solid #202522}.side-note{display:none}nav{display:flex;overflow:auto;margin-top:15px;gap:5px}nav a{white-space:nowrap;padding:10px 12px}.player-note{left:0}.artists{grid-template-columns:1fr}main{padding-top:24px}.hero{padding:21px}.disc{width:88px;height:88px;flex-basis:88px}}
+@media(max-width:430px){.top a{font-size:11px}.hero{align-items:flex-start}.disc{width:66px;height:66px;flex-basis:66px}.disc:after{width:24px;height:24px;border-width:6px}.funk{align-items:flex-start;flex-direction:column}}
+</style>
 </head>
 <body>
-
-<header>
-    <div class="logo">OTÁVIO.</div>
-    <nav>
-        <ul>
-            <li><a href="#home">Início</a></li>
-            <li><a href="#about">Sobre</a></li>
-            <li><a href="#services">Serviços</a></li>
-            <li><a href="#contact">Contato</a></li>
-            <li><a href="videos.html">videos</a></li>
-            <li><a href="site.html">site Em Beta</a></li>
-        </ul>
-    </nav>
-
-    <div class="account-area">
-        <img id="headerAvatar" class="account-avatar" alt="Foto de perfil">
-        <span id="headerAccountName" class="account-name"></span>
-        <button id="accountOpenButton" class="account-button" type="button" onclick="openAccountModal()">
-            <i class="fa-regular fa-user"></i> Entrar / Criar conta
-        </button>
-        <button id="accountLogoutButton" class="account-logout hidden" type="button" onclick="logoutAccount()">Sair</button>
+<div class="layout">
+<aside>
+  <div class="logo">SOARES<span>.</span></div><div class="sublogo">MUSIC EXPERIENCE</div>
+  <nav>
+    <a class="active" href="#inicio">⌂ &nbsp; Início</a>
+    <a href="#teto">♫ &nbsp; Teto</a>
+    <a href="#matue">♫ &nbsp; Matuê</a>
+    <a href="#funk">♫ &nbsp; Funk</a>
+  </nav>
+  <div class="side-note">SEU SOM. SEU MOMENTO.<br>Uma experiência musical dentro do universo Soares.</div>
+</aside>
+<main id="inicio">
+  <div class="top"><div class="eyebrow">SOARES MUSIC / 001</div><a href="index.html">← Voltar ao site</a></div>
+  <h1>SEU SOM.<br><span>SUA VIBE.</span></h1>
+  <p class="intro">Uma área feita para quem vive a música. Explore os sons de Teto, Matuê e o universo do funk em uma experiência inspirada nos players musicais que você já conhece.</p>
+  <section class="hero">
+    <div><strong>Deixa o som falar. 🎧</strong><p>Escolha um artista e curta as faixas diretamente pelo Spotify.</p><a class="pill" href="#teto">EXPLORAR MÚSICAS</a></div>
+    <div class="disc" aria-hidden="true"></div>
+  </section>
+  <section class="section" id="teto">
+    <div class="section-head"><h2>🔥 Teto</h2><p>Perfil e faixas no Spotify</p></div>
+    <div class="artists">
+      <article class="artist"><div class="artist-top"><div class="avatar">T</div><div><h3>Teto</h3><small>Trap brasileiro</small></div></div>
+        <iframe src="https://open.spotify.com/embed/artist/6toiH52ZnBaE3nWdPtItEo?utm_source=generator&theme=0" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <a class="spotify-link" href="https://open.spotify.com/artist/6toiH52ZnBaE3nWdPtItEo" target="_blank" rel="noopener">ABRIR PERFIL NO SPOTIFY ↗</a>
+      </article>
+      <article class="artist"><div class="artist-top"><div class="avatar">T+</div><div><h3>Teto — buscar catálogo</h3><small>Mais faixas e lançamentos</small></div></div>
+        <iframe src="https://open.spotify.com/embed/search/Teto?utm_source=generator&theme=0" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <a class="spotify-link" href="https://open.spotify.com/search/Teto" target="_blank" rel="noopener">VER RESULTADOS ↗</a>
+      </article>
     </div>
-</header>
-
-<section id="home">
-    <span class="section-tag">Video Editor & Creator</span>
-    <h1>OTAVIO</h1>
-    <p style="color:var(--gray);margin-top:20px;">Transformando gameplay em arte cinematográfica.</p>
-    <p style="color:var(--gray);margin-top:20px;">Tecnico Em Tecnologia Digital.</p>
-    <h2>Se Estiver No Celular Ative O Modo Computador</h2>
-    <h3>Para Uma Experiencia Adaptavel</h3>
-</section>
-
-<section id="about">
-    <span class="section-tag">Perfil Profissional</span>
-    <h2 class="section-title">O EDITOR POR TRÁS<br>DA CENA</h2>
-    <p style="max-width:800px;color:var(--gray);font-size:1.2rem;">
-        Editor de vídeos focado em alta performance. Com 15 anos de idade e uma visão técnica apurada,
-        especializo-me em montagens de MTA, FiveM e conteúdos focados em otimização (FPS Boost).
-        Meu objetivo é entregar o máximo de qualidade visual sem perder a fluidez da gameplay.
-    </p>
-    <div class="status-grid">
-        <div class="status-item"><h4>Otimização</h4><p>Tenho Experiencia SIM</p></div>
-        <div class="status-item"><h4>Fluidez</h4><p>Tenho Experiencia SIM</p></div>
-        <div class="status-item"><h4>EDIÇÃO</h4><p>Tenho Experienca SIM</p></div>
-        <div class="status-item"><h4>PC</h4><p>Minha Especialidade</p></div>
+  </section>
+  <section class="section" id="matue">
+    <div class="section-head"><h2>🌌 Matuê</h2><p>Perfil e discografia</p></div>
+    <div class="artists">
+      <article class="artist"><div class="artist-top"><div class="avatar">M</div><div><h3>Matuê</h3><small>Trap / 30PRAUM</small></div></div>
+        <iframe src="https://open.spotify.com/embed/artist/5nP8x4uEFjAAmDzwOEc9b8?utm_source=generator&theme=0" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <a class="spotify-link" href="https://open.spotify.com/artist/5nP8x4uEFjAAmDzwOEc9b8" target="_blank" rel="noopener">ABRIR PERFIL NO SPOTIFY ↗</a>
+      </article>
+      <article class="artist"><div class="artist-top"><div class="avatar">M+</div><div><h3>Matuê — buscar catálogo</h3><small>Álbuns, singles e participações</small></div></div>
+        <iframe src="https://open.spotify.com/embed/search/Matu%C3%AA?utm_source=generator&theme=0" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <a class="spotify-link" href="https://open.spotify.com/search/Matu%C3%AA" target="_blank" rel="noopener">VER RESULTADOS ↗</a>
+      </article>
     </div>
-</section>
-
-<section id="portfolio">
-    <span class="section-tag">Projetos Recentes</span>
-    <h2 class="section-title">PROJETOS</h2>
-    <div class="portfolio-grid">
-        <div class="card">
-            <div class="card-thumb" style="background-image:url('https://i.ytimg.com/an_webp/td47ilTpFlg/mqdefault_6s.webp?du=3000&sqp=CPjbtNcG&rs=AOn4CLC3-oNEZKJgxhFfm3Pl_0oGwfk_Ow');"></div>
-            <div class="card-info">
-                <h3>Videos Feito Em Beamng Drive</h3>
-                <p>Edição focada em ângulos cinematográficos e extrema performance.</p>
-                <a href="https://www.youtube.com/watch?v=td47ilTpFlg" target="_blank" rel="noopener" class="btn-play"><i class="fas fa-play"></i> ASSISTIR</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-thumb" style="background-image:url('https://i.ytimg.com/an_webp/sQSa9ennQbo/mqdefault_6s.webp?du=3000&sqp=CKDdtNcG&rs=AOn4CLCfZihlwzOyzCmgZvZ1X-2MVtr0Dw');"></div>
-            <div class="card-info">
-                <h3>GTA 5 MINI TRAILER</h3>
-                <p>Um Pequeno trailer que fiz do Gta 5.</p>
-                <a href="https://www.youtube.com/watch?v=sQSa9ennQbo&t=10s" target="_blank" rel="noopener" class="btn-play"><i class="fas fa-play"></i> ASSISTIR</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-thumb" style="background-image:url('https://www.bing.com/th?id=OADD2.7902844585013_1MV639EYYKO03BNSV3&pid=21.2&c=16&roil=0&roit=0&roir=1&roib=1');"></div>
-            <div class="card-info">
-                <h3>dicas de Desenpenho (PC)</h3>
-                <p>Configurações técnicas para competitividade em alto nível.</p>
-                <a href="" target="_blank" rel="noopener" class="btn-play"><i class="fas fa-play"></i> ASSISTIR</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-thumb" style="background-image:url('https://bitrebels.com/wp-content/uploads/2020/12/gaming-setup-smooth-gaming-experience-image1.jpg');"></div>
-            <div class="card-info">
-                <h3>OTIMIZÇÃO PARA (PC)</h3>
-                <p>Configurações técnicas para Alto Desenpenho e Extrama Fluidez.</p>
-                <a href="" target="_blank" rel="noopener" class="btn-play"><i class="fas fa-play"></i> ASSISTIR</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="services">
-    <span class="section-tag">O que eu faço</span>
-    <h2 class="section-title">SERVIÇOS</h2>
-    <div class="services-list">
-        <div class="service-box"><i class="fas fa-video"></i><h3>Edição de Vídeo</h3><p>Criação de montagens, highlights e vídeos para YouTube/Instagram.</p></div>
-        <div class="service-box"><i class="fas fa-camera"></i><h3>Cinematics</h3><p>Gravação de cenas aéreas e ângulos profissionais in-game (MTA/GTA V).</p></div>
-        <div class="service-box"><i class="fas fa-microchip"></i><h3>Otimização PC</h3><p>Configuração de sistema para ganho real de FPS e baixa latência.</p></div>
-    </div>
-</section>
-
-<section id="contact">
-    <span class="section-tag">Vamos Negociar?</span>
-    <h2 class="section-title">ENTRE EM CONTATO</h2>
-    <div class="contact-wrapper">
-        <div style="flex:1;">
-            <p style="color:var(--gray);font-size:1.1rem;margin-bottom:20px;">
-                Interessado em uma edição personalizada ou parceria? Clique em um dos links ao lado ou me chame no WhatsApp agora mesmo.
-            </p>
-            <div class="social-big" style="display:flex;justify-content:center;gap:30px;flex-wrap:wrap;">
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
-                    <a href="https://youtube.com/@soaresyt_01" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
-                    <span style="font-size:12px;color:var(--gray);font-weight:500;">YouTube</span>
-                </div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
-                    <a href="https://instagram.com/investidorofc_01" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-                    <span style="font-size:12px;color:var(--gray);font-weight:500;">Instagram</span>
-                </div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
-                    <a href="https://wa.me/558492036576" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
-                    <span style="font-size:12px;color:var(--gray);font-weight:500;">WhatsApp</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<a href="https://wa.me/558492036576" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-</a>
-
-<footer style="padding:50px;text-align:center;border-top:1px solid var(--border);">
-    <p style="color:var(--gray);font-size:.8rem;">&copy; 2026 OTÁVIO TODOS OS DIREITOS RESERVADOS</p>
-</footer>
-
-<!-- Janela de cadastro, login e foto de perfil -->
-<div id="accountModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="account-modal">
-        <div class="modal-top">
-            <h2 id="modalTitle">MINHA CONTA</h2>
-            <button class="modal-close" type="button" onclick="closeAccountModal()" aria-label="Fechar">&times;</button>
-        </div>
-
-        <div id="authPanel">
-            <p id="authDescription" style="color:#aaa;font-size:.88rem;margin-bottom:12px;">Entre na sua conta ou crie seu cadastro.</p>
-
-            <div id="signupNameField" class="hidden">
-                <label for="signupName">Nome</label>
-                <input id="signupName" type="text" maxlength="60" autocomplete="name" placeholder="Seu nome">
-            </div>
-
-            <label for="accountEmail">E-mail</label>
-            <input id="accountEmail" type="email" autocomplete="email" placeholder="seuemail@exemplo.com">
-
-            <label for="accountPassword">Senha</label>
-            <input id="accountPassword" type="password" autocomplete="current-password" minlength="8" placeholder="Mínimo de 8 caracteres">
-
-            <button id="authSubmit" class="modal-action" type="button" onclick="submitAuth()">ENTRAR</button>
-            <button id="authSwitch" class="modal-secondary" type="button" onclick="switchAuthMode()">Criar uma conta</button>
-            <button class="modal-secondary" type="button" onclick="sendPasswordReset()">Esqueci minha senha</button>
-        </div>
-
-        <div id="profilePanel" class="hidden">
-            <p id="signedInEmail" style="color:#aaa;text-align:center;font-size:.85rem;"></p>
-            <img id="profilePreview" class="profile-preview" alt="Sua foto de perfil">
-            <div style="text-align:center;font-weight:700;margin-bottom:12px;">Sua foto de perfil</div>
-            <label for="avatarFile">Escolher ou alterar foto</label>
-            <input id="avatarFile" type="file" accept="image/png,image/jpeg,image/webp">
-            <button class="modal-action" type="button" onclick="uploadProfilePhoto()">SALVAR FOTO DE PERFIL</button>
-            <p style="font-size:.75rem;color:#888;margin-top:8px;">Imagem JPG, PNG ou WebP. Até 5 MB.</p>
-        </div>
-
-        <p id="accountMessage" class="account-message" role="status" aria-live="polite"></p>
-    </div>
+  </section>
+  <section class="section" id="funk">
+    <div class="section-head"><h2>💜 Funk</h2><p>Explore playlists e novidades</p></div>
+    <div class="funk"><div><h3>Funk pra subir o grave</h3><p>Encontre playlists e lançamentos de funk no catálogo do Spotify.</p></div><a class="pill" href="https://open.spotify.com/search/funk/playlists" target="_blank" rel="noopener">EXPLORAR FUNK ↗</a></div>
+    <div class="quick"><a href="https://open.spotify.com/search/funk%20brasileiro" target="_blank" rel="noopener">Funk brasileiro</a><a href="https://open.spotify.com/search/funk%202026" target="_blank" rel="noopener">Novidades</a><a href="https://open.spotify.com/search/funk%20mandel%C3%A3o" target="_blank" rel="noopener">Mandelão</a><a href="https://open.spotify.com/search/funk%20automotivo" target="_blank" rel="noopener">Automotivo</a></div>
+  </section>
+  <section class="section">
+    <div class="section-head"><h2>🔎 Procurar música</h2><p>Pesquise no Spotify</p></div>
+    <form class="searchbox" id="searchForm"><input id="musicQuery" type="search" placeholder="Digite o nome da música ou artista..." aria-label="Pesquisar música"><button type="submit">BUSCAR</button></form>
+    <div class="quick"><a href="https://open.spotify.com/search/Teto" target="_blank" rel="noopener">Teto</a><a href="https://open.spotify.com/search/Matu%C3%AA" target="_blank" rel="noopener">Matuê</a><a href="https://open.spotify.com/search/funk" target="_blank" rel="noopener">Funk</a></div>
+  </section>
+  <footer>As músicas são reproduzidas pelos players oficiais do Spotify. A disponibilidade pode depender da conta e da região. SOARES MUSIC não hospeda nem distribui arquivos musicais.</footer>
+</main>
 </div>
-
+<div class="player-note"><div><b>SOARES MUSIC</b><span>Escolha uma faixa nos players acima para começar</span></div><a href="#inicio">VOLTAR AO TOPO ↑</a></div>
 <script>
-/*
-  COLOQUE AQUI OS DADOS DO SEU PROJETO SUPABASE.
-  Use Project URL e Publishable key (ou a chave anon legada).
-  NUNCA coloque a service_role ou uma chave secreta neste HTML.
-*/
-const SUPABASE_URL = "COLOQUE_SUA_PROJECT_URL";
-const SUPABASE_PUBLIC_KEY = "COLOQUE_SUA_PUBLISHABLE_KEY";
-
-let supabaseClient = null;
-let currentAccount = null;
-let signupMode = false;
-
-const defaultAvatar = "data:image/svg+xml," + encodeURIComponent(
-    '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="#222"/><circle cx="50" cy="38" r="19" fill="#777"/><path d="M15 100c3-25 17-36 35-36s32 11 35 36" fill="#777"/></svg>'
-);
-
-function accountMessage(text) {
-    document.getElementById("accountMessage").textContent = text || "";
-}
-
-function openAccountModal() {
-    document.getElementById("accountModal").classList.add("open");
-    accountMessage("");
-    if (currentAccount) showProfilePanel();
-    else showAuthPanel();
-}
-
-function closeAccountModal() {
-    document.getElementById("accountModal").classList.remove("open");
-}
-
-document.getElementById("accountModal").addEventListener("click", function(event) {
-    if (event.target === this) closeAccountModal();
+document.getElementById('searchForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const q=document.getElementById('musicQuery').value.trim();
+  if(q) window.open('https://open.spotify.com/search/'+encodeURIComponent(q),'_blank','noopener');
 });
-
-function showAuthPanel() {
-    document.getElementById("authPanel").classList.remove("hidden");
-    document.getElementById("profilePanel").classList.add("hidden");
-}
-
-function showProfilePanel() {
-    document.getElementById("authPanel").classList.add("hidden");
-    document.getElementById("profilePanel").classList.remove("hidden");
-    document.getElementById("signedInEmail").textContent = currentAccount?.email || "";
-    loadProfilePhoto();
-}
-
-function switchAuthMode() {
-    signupMode = !signupMode;
-    document.getElementById("signupNameField").classList.toggle("hidden", !signupMode);
-    document.getElementById("modalTitle").textContent = signupMode ? "CRIAR CONTA" : "MINHA CONTA";
-    document.getElementById("authSubmit").textContent = signupMode ? "CRIAR CONTA" : "ENTRAR";
-    document.getElementById("authSwitch").textContent = signupMode ? "Já tenho uma conta" : "Criar uma conta";
-    document.getElementById("authDescription").textContent = signupMode
-        ? "Preencha os dados para criar sua conta."
-        : "Entre na sua conta ou crie seu cadastro.";
-    document.getElementById("accountPassword").autocomplete = signupMode ? "new-password" : "current-password";
-    accountMessage("");
-}
-
-async function submitAuth() {
-    if (!supabaseClient) return accountMessage("Configure primeiro a URL e a chave pública do Supabase no código.");
-
-    const email = document.getElementById("accountEmail").value.trim();
-    const password = document.getElementById("accountPassword").value;
-
-    if (!email || !password) return accountMessage("Preencha e-mail e senha.");
-    if (password.length < 8) return accountMessage("A senha precisa ter pelo menos 8 caracteres.");
-
-    const button = document.getElementById("authSubmit");
-    button.disabled = true;
-    accountMessage("Aguarde...");
-
-    try {
-        if (signupMode) {
-            const displayName = document.getElementById("signupName").value.trim();
-            const { data, error } = await supabaseClient.auth.signUp({
-                email,
-                password,
-                options: { data: { display_name: displayName || "Usuário" } }
-            });
-            if (error) throw error;
-
-            if (data.session) {
-                currentAccount = data.user;
-                updateAccountUI();
-                showProfilePanel();
-                accountMessage("Conta criada com sucesso!");
-            } else {
-                accountMessage("Cadastro iniciado! Confira seu e-mail para confirmar a conta e depois faça login.");
-            }
-        } else {
-            const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-            if (error) throw error;
-            currentAccount = data.user;
-            updateAccountUI();
-            showProfilePanel();
-            accountMessage("Login realizado com sucesso!");
-        }
-    } catch (error) {
-        accountMessage(error.message || "Não foi possível concluir. Tente novamente.");
-    } finally {
-        button.disabled = false;
-    }
-}
-
-async function sendPasswordReset() {
-    if (!supabaseClient) return accountMessage("Configure primeiro o Supabase.");
-    const email = document.getElementById("accountEmail").value.trim();
-    if (!email) return accountMessage("Digite seu e-mail primeiro.");
-
-    try {
-        const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
-            redirectTo: window.location.origin + window.location.pathname
-        });
-        if (error) throw error;
-        accountMessage("Se o e-mail estiver cadastrado, você receberá instruções para redefinir a senha.");
-    } catch (error) {
-        accountMessage(error.message);
-    }
-}
-
-function updateAccountUI() {
-    const openButton = document.getElementById("accountOpenButton");
-    const logoutButton = document.getElementById("accountLogoutButton");
-    const avatar = document.getElementById("headerAvatar");
-    const name = document.getElementById("headerAccountName");
-
-    if (currentAccount) {
-        openButton.innerHTML = '<i class="fa-regular fa-user"></i> Minha conta';
-        logoutButton.classList.remove("hidden");
-        name.textContent = currentAccount.email || "Minha conta";
-        avatar.style.display = "block";
-        loadProfilePhoto();
-    } else {
-        openButton.innerHTML = '<i class="fa-regular fa-user"></i> Entrar / Criar conta';
-        logoutButton.classList.add("hidden");
-        name.textContent = "";
-        avatar.style.display = "none";
-        avatar.src = defaultAvatar;
-    }
-}
-
-async function loadProfilePhoto() {
-    if (!currentAccount || !supabaseClient) return;
-    const { data, error } = await supabaseClient
-        .from("profiles")
-        .select("avatar_url")
-        .eq("id", currentAccount.id)
-        .maybeSingle();
-
-    if (error) {
-        accountMessage("Não foi possível carregar o perfil: " + error.message);
-        return;
-    }
-
-    const photo = data?.avatar_url || defaultAvatar;
-    document.getElementById("profilePreview").src = photo;
-    document.getElementById("headerAvatar").src = photo;
-}
-
-async function uploadProfilePhoto() {
-    if (!currentAccount || !supabaseClient) return accountMessage("Entre na sua conta primeiro.");
-
-    const file = document.getElementById("avatarFile").files[0];
-    if (!file) return accountMessage("Escolha uma imagem primeiro.");
-
-    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
-    if (!allowedTypes.includes(file.type)) return accountMessage("Use uma imagem JPG, PNG ou WebP.");
-    if (file.size > 5 * 1024 * 1024) return accountMessage("A imagem deve ter no máximo 5 MB.");
-
-    accountMessage("Enviando foto...");
-    const extension = file.type === "image/png" ? "png" : file.type === "image/webp" ? "webp" : "jpg";
-    const path = currentAccount.id + "/avatar-" + Date.now() + "." + extension;
-
-    try {
-        const { error: uploadError } = await supabaseClient.storage
-            .from("soares-media")
-            .upload(path, file, { contentType: file.type, upsert: false });
-
-        if (uploadError) throw uploadError;
-
-        const { data: publicData } = supabaseClient.storage
-            .from("soares-media")
-            .getPublicUrl(path);
-
-        const { error: updateError } = await supabaseClient
-            .from("profiles")
-            .update({ avatar_url: publicData.publicUrl })
-            .eq("id", currentAccount.id);
-
-        if (updateError) throw updateError;
-
-        document.getElementById("profilePreview").src = publicData.publicUrl;
-        document.getElementById("headerAvatar").src = publicData.publicUrl;
-        document.getElementById("avatarFile").value = "";
-        accountMessage("Foto de perfil atualizada!");
-    } catch (error) {
-        accountMessage("Erro ao salvar a foto: " + error.message);
-    }
-}
-
-async function logoutAccount() {
-    if (!supabaseClient) return;
-    const { error } = await supabaseClient.auth.signOut();
-    if (error) {
-        accountMessage(error.message);
-        return;
-    }
-    currentAccount = null;
-    updateAccountUI();
-    closeAccountModal();
-}
-
-async function initializeAccount() {
-    if (SUPABASE_URL.includes("COLOQUE_") || SUPABASE_PUBLIC_KEY.includes("COLOQUE_")) {
-        document.getElementById("accountOpenButton").title = "Configure o Supabase para ativar cadastro e login";
-        return;
-    }
-
-    try {
-        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLIC_KEY);
-        const { data, error } = await supabaseClient.auth.getSession();
-        if (error) throw error;
-        currentAccount = data.session?.user || null;
-        updateAccountUI();
-
-        supabaseClient.auth.onAuthStateChange((_event, session) => {
-            currentAccount = session?.user || null;
-            updateAccountUI();
-        });
-    } catch (error) {
-        console.error("Erro ao iniciar autenticação:", error);
-    }
-}
-
-initializeAccount();
 </script>
-
 </body>
 </html>

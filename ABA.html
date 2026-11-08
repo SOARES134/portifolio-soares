@@ -3,30 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#090909">
+<meta name="theme-color" content="#080909">
 <title>SOARES MUSIC — Seu som, seu espaço</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#080909;--panel:#121414;--panel2:#191d1c;--green:#1ed760;--text:#f5f7f5;--muted:#a4aaa6}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#173d2a 0,transparent 38%),var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;min-height:100vh}
-a{color:inherit;text-decoration:none}.layout{display:grid;grid-template-columns:245px 1fr;min-height:100vh}
-aside{background:#050606;border-right:1px solid #202522;padding:28px 18px;position:sticky;top:0;height:100vh}
-.logo{font-weight:950;letter-spacing:2px;font-size:22px}.logo span{color:var(--green)}.sublogo{color:var(--muted);font-size:10px;letter-spacing:3px;margin-top:5px}
-nav{display:grid;gap:9px;margin-top:42px}nav a{padding:13px 14px;border-radius:10px;color:#b9c0bb;font-weight:700;font-size:14px}nav a:hover,nav a.active{background:#17251c;color:var(--green)}
+:root{--bg:#080909;--panel:#121715;--panel2:#19211c;--green:#1ed760;--text:#f5f7f5;--muted:#a4aaa6;--line:#29332c}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at 78% -12%,#17452b 0,transparent 38%),var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+.layout{display:grid;grid-template-columns:245px 1fr;min-height:100vh}
+aside{background:#050706;border-right:1px solid #202922;padding:28px 18px;position:sticky;top:0;height:100vh;z-index:4}
+.logo{font-weight:900;letter-spacing:2px;font-size:22px}.logo span{color:var(--green)}.sublogo{color:var(--muted);font-size:10px;letter-spacing:3px;margin-top:5px}
+nav{display:grid;gap:9px;margin-top:42px}nav a{padding:13px 14px;border-radius:10px;color:#b9c0bb;font-weight:700;font-size:14px;transition:.25s}nav a:hover,nav a.active{background:#17251c;color:var(--green);transform:translateX(4px)}
 .side-note{position:absolute;bottom:26px;left:22px;right:22px;color:#777f79;font-size:11px;line-height:1.6}
-main{padding:30px clamp(18px,4vw,58px) 110px;max-width:1500px;width:100%;margin:auto}
-.top{display:flex;align-items:center;justify-content:space-between;gap:15px}.eyebrow{font-size:11px;letter-spacing:3px;color:var(--green);font-weight:800}.top a{font-size:13px;color:#c5ccc7;border:1px solid #333b36;padding:10px 14px;border-radius:30px}
-h1{font-size:clamp(36px,6vw,68px);line-height:.98;letter-spacing:-3px;margin:28px 0 12px;font-weight:950}h1 span{color:var(--green)}.intro{color:var(--muted);max-width:600px;line-height:1.65;font-size:14px}
-.hero{margin-top:28px;padding:28px;border:1px solid #254331;border-radius:22px;background:linear-gradient(115deg,#142b1d,#101512 65%,#1c2520);display:flex;align-items:center;justify-content:space-between;gap:20px;overflow:hidden}
-.hero strong{font-size:clamp(22px,3vw,34px);display:block;margin-bottom:8px}.hero p{color:#c0c9c2;margin:0 0 18px;font-size:13px}.pill{display:inline-block;background:var(--green);color:#071009;padding:11px 17px;border-radius:30px;font-size:12px;font-weight:900}.disc{width:125px;height:125px;flex:0 0 125px;border-radius:50%;background:repeating-radial-gradient(circle,#171b19 0 3px,#303732 4px 5px);display:grid;place-items:center;box-shadow:0 0 40px #1ed76022}.disc:after{content:"";width:34px;height:34px;border-radius:50%;background:var(--green);border:8px solid #172019}
-.section{margin-top:42px;scroll-margin-top:25px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:16px}.section h2{font-size:23px;margin:0;letter-spacing:-.7px}.section-head p{font-size:12px;color:var(--muted);margin:0}
-.artists{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.artist{background:var(--panel);border:1px solid #252b27;border-radius:18px;padding:17px;min-width:0}.artist-top{display:flex;align-items:center;gap:13px;margin-bottom:14px}.avatar{width:52px;height:52px;border-radius:13px;display:grid;place-items:center;font-size:20px;font-weight:950;background:linear-gradient(135deg,#285a3b,#111)}.artist h3{margin:0 0 4px;font-size:18px}.artist small{color:var(--muted)}iframe{width:100%;border:0;border-radius:12px;background:#202522}.spotify-link{display:inline-block;margin-top:12px;color:var(--green);font-size:12px;font-weight:800}
-.funk{background:linear-gradient(120deg,#261a31,#15131a);border:1px solid #44314e;border-radius:18px;padding:22px;display:flex;align-items:center;justify-content:space-between;gap:20px}.funk h3{font-size:21px;margin:0 0 7px}.funk p{margin:0;color:#c0b7c7;font-size:13px;line-height:1.5}.funk .pill{background:#c98aff}
-.searchbox{display:flex;gap:10px;margin-top:22px}.searchbox input{width:100%;background:#111614;border:1px solid #303a33;border-radius:12px;padding:14px;color:white;outline:none}.searchbox input:focus{border-color:var(--green)}.searchbox button{background:var(--green);border:0;border-radius:12px;padding:0 18px;font-weight:900;cursor:pointer}
-.quick{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.quick a{font-size:12px;color:#d2d8d3;background:#171c19;border:1px solid #2b342e;padding:9px 12px;border-radius:30px}
-footer{border-top:1px solid #252b27;margin-top:50px;padding-top:20px;color:#777f79;font-size:11px;line-height:1.6}
+main{padding:30px clamp(18px,4vw,58px) 125px;max-width:1500px;width:100%;margin:auto}
+.top{display:flex;align-items:center;justify-content:space-between;gap:15px}.eyebrow{font-size:11px;letter-spacing:3px;color:var(--green);font-weight:800}
+.top-actions{display:flex;align-items:center;gap:9px}.top-btn{font-size:12px;color:#e8eee9;border:1px solid #3a463d;background:#111713;padding:10px 14px;border-radius:30px;cursor:pointer;transition:.2s}.top-btn:hover{border-color:var(--green);color:var(--green);transform:translateY(-2px)}.account-btn{background:var(--green);color:#061009;border-color:var(--green);font-weight:900}
+h1{font-size:clamp(38px,6vw,72px);line-height:.96;letter-spacing:-3px;margin:32px 0 13px;font-weight:900}h1 span{color:var(--green)}
+.intro{color:var(--muted);max-width:650px;line-height:1.7;font-size:14px}
+.hero{margin-top:28px;padding:30px;border:1px solid #254331;border-radius:22px;background:linear-gradient(115deg,#142b1d,#101512 65%,#1c2520);display:flex;align-items:center;justify-content:space-between;gap:20px;overflow:hidden;position:relative;animation:rise .8s both}
+.hero:before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:#1ed76012;right:5%;top:-100px;filter:blur(8px)}
+.hero strong{font-size:clamp(22px,3vw,34px);display:block;margin-bottom:8px;position:relative}.hero p{color:#c0c9c2;margin:0 0 18px;font-size:13px;position:relative}.pill{display:inline-block;background:var(--green);color:#071009;padding:11px 17px;border-radius:30px;font-size:12px;font-weight:900;position:relative;transition:.25s}.pill:hover{transform:translateY(-3px);box-shadow:0 9px 25px #1ed76035}
+.disc{width:125px;height:125px;flex:0 0 125px;border-radius:50%;background:repeating-radial-gradient(circle,#171b19 0 3px,#303732 4px 5px);display:grid;place-items:center;box-shadow:0 0 40px #1ed76022;animation:spin 9s linear infinite;position:relative}.disc:after{content:"";width:34px;height:34px;border-radius:50%;background:var(--green);border:8px solid #172019}
+.section{margin-top:48px;scroll-margin-top:25px;animation:rise .7s both}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:17px}.section h2{font-size:24px;margin:0;letter-spacing:-.7px}.section-head p{font-size:12px;color:var(--muted);margin:0}
+.artists{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.artist{background:linear-gradient(145deg,#151b17,#101311);border:1px solid #252f28;border-radius:18px;padding:17px;min-width:0;transition:transform .28s,border-color .28s,box-shadow .28s}.artist:hover{transform:translateY(-6px);border-color:#327849;box-shadow:0 16px 35px #0006}.artist-top{display:flex;align-items:center;gap:13px;margin-bottom:14px}.avatar{width:52px;height:52px;border-radius:13px;display:grid;place-items:center;font-size:20px;font-weight:950;background:linear-gradient(135deg,#285a3b,#111);color:white}.artist h3{margin:0 0 4px;font-size:18px}.artist small{color:var(--muted)}
+iframe{width:100%;border:0;border-radius:12px;background:#202522}.spotify-link{display:inline-block;margin-top:12px;color:var(--green);font-size:12px;font-weight:800}
+.funk{background:linear-gradient(120deg,#261a31,#15131a);border:1px solid #44314e;border-radius:18px;padding:22px;display:flex;align-items:center;justify-content:space-between;gap:20px;transition:.25s}.funk:hover{transform:translateY(-4px);border-color:#a96bd1}.funk h3{font-size:21px;margin:0 0 7px}.funk p{margin:0;color:#c0b7c7;font-size:13px;line-height:1.5}.funk .pill{background:#c98aff;color:#170d20}
+.searchbox{display:flex;gap:10px;margin-top:22px}.searchbox input,.modal input{width:100%;background:#111614;border:1px solid #303a33;border-radius:12px;padding:14px;color:white;outline:none}.searchbox input:focus,.modal input:focus{border-color:var(--green)}.searchbox button,.primary{background:var(--green);color:#071009;border:0;border-radius:12px;padding:0 18px;font-weight:900;cursor:pointer;transition:.2s}.searchbox button:hover,.primary:hover{filter:brightness(1.08);transform:translateY(-2px)}
+.quick{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.quick a{font-size:12px;color:#d2d8d3;background:#171c19;border:1px solid #2b342e;padding:9px 12px;border-radius:30px;transition:.2s}.quick a:hover{color:var(--green);border-color:var(--green)}
+.track-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.track{background:#141a16;border:1px solid #29342c;padding:16px;border-radius:14px;transition:.25s}.track:hover{transform:translateY(-4px);border-color:#34784a}.track b{display:block;margin-bottom:6px}.track small{color:var(--muted);display:block;line-height:1.5}.track a{display:inline-block;color:var(--green);font-size:11px;font-weight:800;margin-top:12px}
+.account-state{display:none;color:var(--green);font-size:11px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+footer{border-top:1px solid #252b27;margin-top:55px;padding-top:20px;color:#777f79;font-size:11px;line-height:1.7}
 .player-note{position:fixed;bottom:0;left:245px;right:0;background:#101512ed;backdrop-filter:blur(15px);border-top:1px solid #2b352e;padding:13px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;z-index:5}.player-note b{font-size:13px}.player-note span{display:block;color:var(--muted);font-size:11px;margin-top:3px}.player-note a{color:var(--green);font-size:12px;font-weight:800}
-@media(max-width:800px){.layout{display:block}aside{height:auto;position:relative;padding:18px;border-right:0;border-bottom:1px solid #202522}.side-note{display:none}nav{display:flex;overflow:auto;margin-top:15px;gap:5px}nav a{white-space:nowrap;padding:10px 12px}.player-note{left:0}.artists{grid-template-columns:1fr}main{padding-top:24px}.hero{padding:21px}.disc{width:88px;height:88px;flex-basis:88px}}
-@media(max-width:430px){.top a{font-size:11px}.hero{align-items:flex-start}.disc{width:66px;height:66px;flex-basis:66px}.disc:after{width:24px;height:24px;border-width:6px}.funk{align-items:flex-start;flex-direction:column}}
+.modal-backdrop{position:fixed;inset:0;background:#000b;backdrop-filter:blur(9px);display:none;place-items:center;padding:18px;z-index:20}.modal-backdrop.show{display:grid;animation:fade .2s}.modal{width:min(440px,100%);background:#111713;border:1px solid #344238;border-radius:22px;padding:25px;box-shadow:0 25px 90px #000b;animation:pop .28s both}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.modal h2{margin:0;font-size:24px}.close{border:0;background:#202922;color:white;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:18px}.modal p{color:var(--muted);font-size:13px;line-height:1.5}.tabs{display:flex;gap:8px;margin:18px 0}.tab{flex:1;padding:10px;border:1px solid #344238;border-radius:10px;background:#18201b;color:#cbd4cd;cursor:pointer;font-weight:800}.tab.active{background:#1ed760;color:#071009;border-color:#1ed760}.modal form{display:grid;gap:10px}.modal input{padding:13px}.modal .primary{padding:13px}.text-btn{border:0;background:none;color:var(--green);cursor:pointer;font-size:12px;font-weight:800;padding:10px}.message{min-height:18px;color:#b8c7bc;font-size:12px;line-height:1.5}.account-info{display:none;margin-top:14px;padding:14px;background:#18201b;border-radius:12px}.account-info b{display:block;margin-bottom:5px}.account-info span{color:var(--muted);font-size:12px;word-break:break-all}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}@keyframes fade{from{opacity:0}to{opacity:1}}@keyframes pop{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:800px){.layout{display:block}aside{height:auto;position:relative;padding:18px;border-right:0;border-bottom:1px solid #202522}.side-note{display:none}nav{display:flex;overflow:auto;margin-top:15px;gap:5px}nav a{white-space:nowrap;padding:10px 12px}.player-note{left:0}.artists{grid-template-columns:1fr}main{padding-top:24px}.hero{padding:21px}.disc{width:88px;height:88px;flex-basis:88px}.track-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.top{align-items:flex-start;flex-direction:column}.top-actions{width:100%;justify-content:space-between}.account-state{max-width:110px}.hero{align-items:flex-start}.disc{width:66px;height:66px;flex-basis:66px}.disc:after{width:24px;height:24px;border-width:6px}.funk{align-items:flex-start;flex-direction:column}.track-grid{grid-template-columns:1fr}.player-note{padding:11px 15px}.player-note a{font-size:10px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
@@ -38,63 +56,198 @@ footer{border-top:1px solid #252b27;margin-top:50px;padding-top:20px;color:#777f
     <a href="#teto">♫ &nbsp; Teto</a>
     <a href="#matue">♫ &nbsp; Matuê</a>
     <a href="#funk">♫ &nbsp; Funk</a>
+    <a href="#conta" id="navAccount">♙ &nbsp; Minha conta</a>
   </nav>
   <div class="side-note">SEU SOM. SEU MOMENTO.<br>Uma experiência musical dentro do universo Soares.</div>
 </aside>
 <main id="inicio">
-  <div class="top"><div class="eyebrow">SOARES MUSIC / 001</div><a href="index.html">← Voltar ao site</a></div>
+  <div class="top">
+    <div class="eyebrow">SOARES MUSIC / 002</div>
+    <div class="top-actions">
+      <span class="account-state" id="accountState"></span>
+      <a class="top-btn" href="index.html">← Voltar ao site</a>
+      <button class="top-btn account-btn" id="openAccount">Entrar / Criar conta</button>
+    </div>
+  </div>
   <h1>SEU SOM.<br><span>SUA VIBE.</span></h1>
-  <p class="intro">Uma área feita para quem vive a música. Explore os sons de Teto, Matuê e o universo do funk em uma experiência inspirada nos players musicais que você já conhece.</p>
+  <p class="intro">Sua central musical. Explore artistas, descubra playlists e encontre as versões oficiais das músicas para ouvir na íntegra nas plataformas disponíveis.</p>
   <section class="hero">
-    <div><strong>Deixa o som falar. 🎧</strong><p>Escolha um artista e curta as faixas diretamente pelo Spotify.</p><a class="pill" href="#teto">EXPLORAR MÚSICAS</a></div>
+    <div><strong>Deixa o som falar. 🎧</strong><p>Escolha seu artista, encontre sua faixa e curta sem complicação.</p><a class="pill" href="#teto">EXPLORAR MÚSICAS</a></div>
     <div class="disc" aria-hidden="true"></div>
   </section>
-  <section class="section" id="teto">
-    <div class="section-head"><h2>🔥 Teto</h2><p>Perfil e faixas no Spotify</p></div>
+
+  <section class="section reveal" id="teto">
+    <div class="section-head"><h2>🔥 Teto</h2><p>Catálogo e faixas oficiais</p></div>
     <div class="artists">
       <article class="artist"><div class="artist-top"><div class="avatar">T</div><div><h3>Teto</h3><small>Trap brasileiro</small></div></div>
         <iframe src="https://open.spotify.com/embed/artist/6toiH52ZnBaE3nWdPtItEo?utm_source=generator&theme=0" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         <a class="spotify-link" href="https://open.spotify.com/artist/6toiH52ZnBaE3nWdPtItEo" target="_blank" rel="noopener">ABRIR PERFIL NO SPOTIFY ↗</a>
       </article>
-      <article class="artist"><div class="artist-top"><div class="avatar">T+</div><div><h3>Teto — buscar catálogo</h3><small>Mais faixas e lançamentos</small></div></div>
-        <iframe src="https://open.spotify.com/embed/search/Teto?utm_source=generator&theme=0" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <a class="spotify-link" href="https://open.spotify.com/search/Teto" target="_blank" rel="noopener">VER RESULTADOS ↗</a>
+      <article class="artist"><div class="artist-top"><div class="avatar">▶</div><div><h3>Ouvir Teto completo</h3><small>Encontre faixas e videoclipes oficiais</small></div></div>
+        <div class="track"><b>Catálogo de Teto</b><small>Pesquise músicas, álbuns e apresentações oficiais no YouTube.</small><a href="https://www.youtube.com/results?search_query=Teto+musicas+oficiais" target="_blank" rel="noopener">ABRIR MÚSICAS ↗</a></div>
+        <div class="quick"><a href="https://www.youtube.com/results?search_query=Teto+album" target="_blank" rel="noopener">Álbuns</a><a href="https://www.youtube.com/results?search_query=Teto+clipes+oficiais" target="_blank" rel="noopener">Clipes oficiais</a></div>
       </article>
     </div>
   </section>
-  <section class="section" id="matue">
+
+  <section class="section reveal" id="matue">
     <div class="section-head"><h2>🌌 Matuê</h2><p>Perfil e discografia</p></div>
     <div class="artists">
       <article class="artist"><div class="artist-top"><div class="avatar">M</div><div><h3>Matuê</h3><small>Trap / 30PRAUM</small></div></div>
         <iframe src="https://open.spotify.com/embed/artist/5nP8x4uEFjAAmDzwOEc9b8?utm_source=generator&theme=0" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         <a class="spotify-link" href="https://open.spotify.com/artist/5nP8x4uEFjAAmDzwOEc9b8" target="_blank" rel="noopener">ABRIR PERFIL NO SPOTIFY ↗</a>
       </article>
-      <article class="artist"><div class="artist-top"><div class="avatar">M+</div><div><h3>Matuê — buscar catálogo</h3><small>Álbuns, singles e participações</small></div></div>
-        <iframe src="https://open.spotify.com/embed/search/Matu%C3%AA?utm_source=generator&theme=0" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <a class="spotify-link" href="https://open.spotify.com/search/Matu%C3%AA" target="_blank" rel="noopener">VER RESULTADOS ↗</a>
+      <article class="artist"><div class="artist-top"><div class="avatar">▶</div><div><h3>Ouvir Matuê completo</h3><small>Encontre faixas e videoclipes oficiais</small></div></div>
+        <div class="track"><b>Catálogo de Matuê</b><small>Pesquise músicas, álbuns e apresentações oficiais no YouTube.</small><a href="https://www.youtube.com/results?search_query=Matue+musicas+oficiais" target="_blank" rel="noopener">ABRIR MÚSICAS ↗</a></div>
+        <div class="quick"><a href="https://www.youtube.com/results?search_query=Matue+album+333" target="_blank" rel="noopener">Álbum 333</a><a href="https://www.youtube.com/results?search_query=Matue+clipes+oficiais" target="_blank" rel="noopener">Clipes oficiais</a></div>
       </article>
     </div>
   </section>
-  <section class="section" id="funk">
-    <div class="section-head"><h2>💜 Funk</h2><p>Explore playlists e novidades</p></div>
-    <div class="funk"><div><h3>Funk pra subir o grave</h3><p>Encontre playlists e lançamentos de funk no catálogo do Spotify.</p></div><a class="pill" href="https://open.spotify.com/search/funk/playlists" target="_blank" rel="noopener">EXPLORAR FUNK ↗</a></div>
-    <div class="quick"><a href="https://open.spotify.com/search/funk%20brasileiro" target="_blank" rel="noopener">Funk brasileiro</a><a href="https://open.spotify.com/search/funk%202026" target="_blank" rel="noopener">Novidades</a><a href="https://open.spotify.com/search/funk%20mandel%C3%A3o" target="_blank" rel="noopener">Mandelão</a><a href="https://open.spotify.com/search/funk%20automotivo" target="_blank" rel="noopener">Automotivo</a></div>
+
+  <section class="section reveal" id="funk">
+    <div class="section-head"><h2>💜 Funk</h2><p>Playlists e vertentes</p></div>
+    <div class="funk"><div><h3>Funk pra subir o grave</h3><p>Explore funk brasileiro, mandelão, automotivo e lançamentos.</p></div><a class="pill" href="https://www.youtube.com/results?search_query=funk+brasileiro+playlist+oficial" target="_blank" rel="noopener">EXPLORAR FUNK ↗</a></div>
+    <div class="quick"><a href="https://www.youtube.com/results?search_query=funk+brasileiro+playlist" target="_blank" rel="noopener">Funk brasileiro</a><a href="https://www.youtube.com/results?search_query=funk+2026" target="_blank" rel="noopener">Novidades</a><a href="https://www.youtube.com/results?search_query=funk+mandelao" target="_blank" rel="noopener">Mandelão</a><a href="https://www.youtube.com/results?search_query=funk+automotivo" target="_blank" rel="noopener">Automotivo</a></div>
   </section>
-  <section class="section">
-    <div class="section-head"><h2>🔎 Procurar música</h2><p>Pesquise no Spotify</p></div>
+
+  <section class="section reveal">
+    <div class="section-head"><h2>🔎 Procurar música</h2><p>Busque em plataformas oficiais</p></div>
     <form class="searchbox" id="searchForm"><input id="musicQuery" type="search" placeholder="Digite o nome da música ou artista..." aria-label="Pesquisar música"><button type="submit">BUSCAR</button></form>
-    <div class="quick"><a href="https://open.spotify.com/search/Teto" target="_blank" rel="noopener">Teto</a><a href="https://open.spotify.com/search/Matu%C3%AA" target="_blank" rel="noopener">Matuê</a><a href="https://open.spotify.com/search/funk" target="_blank" rel="noopener">Funk</a></div>
+    <div class="quick"><a href="https://open.spotify.com/search/Teto" target="_blank" rel="noopener">Spotify · Teto</a><a href="https://open.spotify.com/search/Matu%C3%AA" target="_blank" rel="noopener">Spotify · Matuê</a><a href="https://open.spotify.com/search/funk" target="_blank" rel="noopener">Spotify · Funk</a></div>
   </section>
-  <footer>As músicas são reproduzidas pelos players oficiais do Spotify. A disponibilidade pode depender da conta e da região. SOARES MUSIC não hospeda nem distribui arquivos musicais.</footer>
+
+  <section class="section reveal" id="conta">
+    <div class="section-head"><h2>♙ Central de contas</h2><p>Seu acesso à SOARES MUSIC</p></div>
+    <div class="funk" style="background:linear-gradient(120deg,#14251a,#101512);border-color:#2e5139">
+      <div><h3 id="accountTitle">Entre no seu espaço</h3><p id="accountDescription">Crie sua conta ou entre para acessar sua área pessoal.</p></div>
+      <button class="pill" id="accountSectionButton" style="border:0;cursor:pointer">ENTRAR / CADASTRAR</button>
+    </div>
+    <div class="account-info" id="accountInfo"><b>Conta conectada</b><span id="accountEmail"></span><br><button class="text-btn" id="logoutButton">SAIR DA CONTA</button></div>
+  </section>
+  <footer>Os players do Spotify seguem as condições de reprodução da própria plataforma. Os links do YouTube direcionam para resultados de busca e conteúdos disponibilizados pelos respectivos canais. SOARES MUSIC não hospeda nem distribui arquivos musicais.</footer>
 </main>
 </div>
-<div class="player-note"><div><b>SOARES MUSIC</b><span>Escolha uma faixa nos players acima para começar</span></div><a href="#inicio">VOLTAR AO TOPO ↑</a></div>
+<div class="player-note"><div><b>SOARES MUSIC</b><span>Escolha uma plataforma e curta suas músicas</span></div><a href="#inicio">VOLTAR AO TOPO ↑</a></div>
+
+<div class="modal-backdrop" id="accountModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modal-head"><h2 id="modalTitle">Sua conta</h2><button class="close" id="closeModal" aria-label="Fechar">×</button></div>
+    <p>Entre ou crie sua conta para acessar sua central SOARES MUSIC.</p>
+    <div class="tabs"><button class="tab active" id="loginTab" type="button">Entrar</button><button class="tab" id="signupTab" type="button">Criar conta</button></div>
+    <form id="authForm">
+      <input id="nameInput" type="text" placeholder="Seu nome" autocomplete="name" style="display:none">
+      <input id="emailInput" type="email" placeholder="E-mail" autocomplete="email" required>
+      <input id="passwordInput" type="password" placeholder="Senha (mínimo 6 caracteres)" autocomplete="current-password" minlength="6" required>
+      <button class="primary" id="submitAuth" type="submit">ENTRAR</button>
+    </form>
+    <button class="text-btn" id="resetPassword" type="button">ESQUECI MINHA SENHA</button>
+    <div class="message" id="authMessage" aria-live="polite"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-document.getElementById('searchForm').addEventListener('submit',function(e){
-  e.preventDefault();
-  const q=document.getElementById('musicQuery').value.trim();
-  if(q) window.open('https://open.spotify.com/search/'+encodeURIComponent(q),'_blank','noopener');
+// Use exatamente o mesmo projeto Supabase conectado ao seu site principal.
+const SUPABASE_URL = "COLOQUE_SUA_PROJECT_URL";
+const SUPABASE_PUBLIC_KEY = "COLOQUE_SUA_PUBLISHABLE_KEY";
+
+let supabaseClient = null;
+let authMode = "login";
+const modal = document.getElementById("accountModal");
+const authMessage = document.getElementById("authMessage");
+const authForm = document.getElementById("authForm");
+
+function openModal(){modal.classList.add("show");authMessage.textContent="";}
+function closeModal(){modal.classList.remove("show");}
+document.getElementById("openAccount").addEventListener("click",openModal);
+document.getElementById("accountSectionButton").addEventListener("click",openModal);
+document.getElementById("navAccount").addEventListener("click",e=>{e.preventDefault();document.getElementById("conta").scrollIntoView({behavior:"smooth"});openModal();});
+document.getElementById("closeModal").addEventListener("click",closeModal);
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
+
+function setMode(mode){
+  authMode=mode;
+  const signup=mode==="signup";
+  document.getElementById("loginTab").classList.toggle("active",!signup);
+  document.getElementById("signupTab").classList.toggle("active",signup);
+  document.getElementById("nameInput").style.display=signup?"block":"none";
+  document.getElementById("nameInput").required=signup;
+  document.getElementById("passwordInput").autocomplete=signup?"new-password":"current-password";
+  document.getElementById("submitAuth").textContent=signup?"CRIAR CONTA":"ENTRAR";
+  document.getElementById("resetPassword").style.display=signup?"none":"inline-block";
+  authMessage.textContent="";
+}
+document.getElementById("loginTab").addEventListener("click",()=>setMode("login"));
+document.getElementById("signupTab").addEventListener("click",()=>setMode("signup"));
+
+function showAccount(user){
+  const logged=!!user;
+  document.getElementById("accountState").style.display=logged?"inline":"none";
+  document.getElementById("accountState").textContent=logged?(user.email||"Conta conectada"):"";
+  document.getElementById("openAccount").textContent=logged?"Minha conta":"Entrar / Criar conta";
+  document.getElementById("accountTitle").textContent=logged?"Você está conectado!":"Entre no seu espaço";
+  document.getElementById("accountDescription").textContent=logged?"Sua conta está ativa nesta SOARES MUSIC.":"Crie sua conta ou entre para acessar sua área pessoal.";
+  document.getElementById("accountInfo").style.display=logged?"block":"none";
+  document.getElementById("accountEmail").textContent=logged?(user.email||"Conta conectada"):"";
+  document.getElementById("accountSectionButton").textContent=logged?"GERENCIAR CONTA":"ENTRAR / CADASTRAR";
+}
+document.getElementById("logoutButton").addEventListener("click",async()=>{
+  if(!supabaseClient)return;
+  const {error}=await supabaseClient.auth.signOut();
+  authMessage.textContent=error?error.message:"Você saiu da sua conta.";
+  showAccount(null);
 });
+
+authForm.addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(!supabaseClient){authMessage.textContent="Configure a URL e a chave pública do Supabase no final deste arquivo.";return;}
+  const email=document.getElementById("emailInput").value.trim();
+  const password=document.getElementById("passwordInput").value;
+  const submit=document.getElementById("submitAuth");
+  submit.disabled=true;submit.textContent="AGUARDE...";
+  try{
+    let result;
+    if(authMode==="signup"){
+      const name=document.getElementById("nameInput").value.trim();
+      result=await supabaseClient.auth.signUp({email,password,options:{data:{full_name:name,username:name.toLowerCase().replace(/[^a-z0-9]+/g,"_")}}});
+      if(!result.error && !result.data.session)authMessage.textContent="Cadastro criado! Confira seu e-mail para confirmar a conta antes de entrar.";
+    }else{
+      result=await supabaseClient.auth.signInWithPassword({email,password});
+    }
+    if(result.error)authMessage.textContent=result.error.message;
+    else if(result.data.session){authMessage.textContent="Login realizado com sucesso!";showAccount(result.data.user);setTimeout(closeModal,900);}
+  }catch(err){authMessage.textContent="Não foi possível concluir. Tente novamente.";}
+  finally{submit.disabled=false;submit.textContent=authMode==="signup"?"CRIAR CONTA":"ENTRAR";}
+});
+
+document.getElementById("resetPassword").addEventListener("click",async()=>{
+  if(!supabaseClient){authMessage.textContent="Configure primeiro a conexão com o Supabase.";return;}
+  const email=document.getElementById("emailInput").value.trim();
+  if(!email){authMessage.textContent="Digite seu e-mail acima para receber o link de recuperação.";return;}
+  const {error}=await supabaseClient.auth.resetPasswordForEmail(email,{redirectTo:window.location.origin});
+  authMessage.textContent=error?error.message:"Se o e-mail estiver cadastrado, você receberá as instruções de recuperação.";
+});
+
+if(window.supabase && SUPABASE_URL.startsWith("https://") && SUPABASE_PUBLIC_KEY && !SUPABASE_PUBLIC_KEY.includes("COLOQUE")){
+  supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLIC_KEY);
+  supabaseClient.auth.getSession().then(({data})=>showAccount(data.session?.user||null));
+  supabaseClient.auth.onAuthStateChange((_event,session)=>showAccount(session?.user||null));
+}else{
+  showAccount(null);
+}
+
+document.getElementById("searchForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  const q=document.getElementById("musicQuery").value.trim();
+  if(q)window.open("https://www.youtube.com/results?search_query="+encodeURIComponent(q+" música oficial"),"_blank","noopener");
+});
+
+// Anima os blocos quando entram na tela.
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("visible");observer.unobserve(entry.target);}});
+},{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 </script>
 </body>
 </html>

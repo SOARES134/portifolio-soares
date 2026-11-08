@@ -3,1350 +3,943 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SOARES MUSIC</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SOARES MEDIA CENTER</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  --bg: #08090d;
-  --panel: #12141b;
-  --panel2: #191c25;
-  --accent: #a855f7;
-  --accent2: #6d35d9;
-  --text: #ffffff;
-  --muted: #9295a3;
+  --bg:#08090d;
+  --panel:#13151d;
+  --panel2:#1c1f29;
+  --purple:#a855f7;
+  --text:#fff;
+  --muted:#9295a3;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: Inter, sans-serif;
-  overflow-x: hidden;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  font-family: inherit;
-}
-
-.app {
-  display: flex;
-  min-height: 100vh;
-  padding-bottom: 100px;
-}
-
-/* SIDEBAR */
-
-.sidebar {
-  width: 245px;
-  background: #0d0f15;
-  padding: 25px 17px;
-  position: fixed;
-  height: 100vh;
-  border-right: 1px solid #242630;
-  z-index: 10;
-}
-
-.logo {
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: -1px;
-  margin: 8px 10px 40px;
-}
-
-.logo span {
-  color: var(--accent);
-}
-
-.nav-title {
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  margin: 25px 10px 12px;
-}
-
-.nav-item {
-  padding: 13px 12px;
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  border-radius: 10px;
-  color: #b7b8c3;
-  cursor: pointer;
-  font-size: 14px;
-  transition: .2s;
-}
-
-.nav-item:hover,
-.nav-item.active {
-  background: #20212d;
-  color: white;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
-.nav-item.active {
-  border-left: 3px solid var(--accent);
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,sans-serif;
+  min-height:100vh;
 }
 
-.nav-icon {
-  font-size: 19px;
-}
-
-.sidebar-bottom {
-  position: absolute;
-  bottom: 25px;
-  left: 20px;
-  right: 20px;
-  color: var(--muted);
-  font-size: 11px;
-}
+button,input{font:inherit}
 
-/* MAIN */
+button{cursor:pointer;border:none}
 
-.main {
-  margin-left: 245px;
-  width: calc(100% - 245px);
-  padding: 27px 35px;
-  max-width: 1600px;
-}
-
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  margin-bottom: 35px;
+.sidebar{
+  width:235px;
+  height:100vh;
+  position:fixed;
+  left:0;top:0;
+  background:#0d0f15;
+  border-right:1px solid #252630;
+  padding:25px 17px;
+  z-index:5;
 }
 
-.search {
-  width: min(420px, 65%);
-  background: var(--panel2);
-  border: 1px solid #292b36;
-  padding: 13px 17px;
-  border-radius: 30px;
-  color: white;
-  outline: none;
+.logo{
+  font-size:21px;
+  font-weight:900;
+  margin:10px 8px 40px;
 }
 
-.search:focus {
-  border-color: var(--accent);
-}
-
-.profile-button {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--panel2);
-  color: white;
-  padding: 7px 13px 7px 7px;
-  border-radius: 30px;
-}
+.logo span{color:var(--purple)}
 
-.avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: linear-gradient(135deg,#a855f7,#4020a0);
-  object-fit: cover;
+.nav-title{
+  font-size:11px;
+  letter-spacing:2px;
+  color:var(--muted);
+  margin:25px 10px 12px;
 }
-
-/* HERO */
 
-.hero {
-  min-height: 270px;
-  border-radius: 20px;
-  padding: 35px;
-  display: flex;
-  align-items: center;
-  background:
-    linear-gradient(90deg,rgba(12,8,25,.98),rgba(45,19,80,.75)),
-    radial-gradient(circle at 85% 20%,#a855f7,#171021);
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 35px;
+.nav{
+  padding:14px;
+  color:#aaa;
+  border-radius:10px;
+  margin:5px 0;
+  cursor:pointer;
+  font-size:14px;
+  transition:.2s;
 }
 
-.hero::after {
-  content: "♪";
-  position: absolute;
-  right: 65px;
-  top: -75px;
-  font-size: 350px;
-  font-weight: 900;
-  color: #ffffff0b;
+.nav:hover,.nav.active{
+  background:#242532;
+  color:white;
 }
 
-.hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 550px;
+.nav.active{
+  border-left:3px solid var(--purple);
 }
 
-.hero-label {
-  color: #d6a9ff;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 3px;
+.main{
+  margin-left:235px;
+  padding:30px;
+  max-width:1600px;
 }
 
-.hero h1 {
-  font-size: clamp(30px,5vw,53px);
-  margin: 15px 0;
-  font-weight: 900;
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:30px;
 }
 
-.hero p {
-  color: #d1c9dc;
-  font-size: 14px;
-  line-height: 1.7;
-  margin-bottom: 23px;
+.search{
+  background:var(--panel2);
+  border:1px solid #30323d;
+  padding:13px 18px;
+  border-radius:30px;
+  color:white;
+  outline:none;
+  width:min(450px,70%);
 }
 
-.primary-btn {
-  background: var(--accent);
-  color: white;
-  padding: 13px 25px;
-  border-radius: 30px;
-  font-weight: 800;
-  transition: .2s;
-}
+.search:focus{border-color:var(--purple)}
 
-.primary-btn:hover {
-  background: #bd83ff;
-  transform: scale(1.04);
+.hero{
+  background:linear-gradient(110deg,#25103d,#111827,#090a11);
+  padding:35px;
+  border-radius:20px;
+  min-height:210px;
+  margin-bottom:30px;
+  display:flex;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
 }
 
-/* SECTIONS */
-
-.section {
-  margin: 35px 0;
+.hero:after{
+  content:"▶";
+  position:absolute;
+  right:60px;
+  font-size:180px;
+  color:#ffffff0b;
 }
 
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
+.hero-content{z-index:1}
 
-.section h2 {
-  font-size: 21px;
-  font-weight: 800;
+.hero small{
+  color:#c89cff;
+  font-weight:800;
+  letter-spacing:3px;
 }
 
-.section-header small {
-  color: var(--muted);
+.hero h1{
+  font-size:clamp(28px,5vw,48px);
+  margin:14px 0;
 }
 
-.music-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(155px,1fr));
-  gap: 18px;
+.hero p{
+  color:#c4bfd0;
+  font-size:13px;
 }
 
-.music-card {
-  padding: 12px;
-  background: var(--panel);
-  border-radius: 14px;
-  transition: .25s;
-  cursor: pointer;
-  min-width: 0;
-}
+.section{margin:35px 0}
 
-.music-card:hover {
-  background: #242632;
-  transform: translateY(-5px);
+.section h2{
+  font-size:21px;
+  margin-bottom:20px;
 }
 
-.cover {
-  width: 100%;
-  aspect-ratio: 1;
-  border-radius: 10px;
-  object-fit: cover;
-  background: linear-gradient(135deg,#6023a8,#14101f);
+.add-box{
+  background:var(--panel);
+  padding:25px;
+  border-radius:17px;
+  border:1px solid #252733;
+  margin-bottom:30px;
 }
 
-.music-card h3 {
-  font-size: 14px;
-  margin: 12px 0 5px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+.add-box h2{margin-bottom:8px}
 
-.music-card p {
-  color: var(--muted);
-  font-size: 12px;
+.add-box p{
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:18px;
+  line-height:1.6;
 }
 
-.card-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 12px;
+.input{
+  width:100%;
+  padding:14px;
+  border-radius:9px;
+  background:#20222d;
+  color:white;
+  border:1px solid #383a48;
+  outline:none;
+  margin:7px 0;
 }
 
-.play-small {
-  background: var(--accent);
-  color: white;
-  width: 37px;
-  height: 37px;
-  border-radius: 50%;
-  font-size: 15px;
-}
+.input:focus{border-color:var(--purple)}
 
-.like {
-  background: transparent;
-  color: #aaa;
-  font-size: 20px;
+.row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
-.like.liked {
-  color: #e85aab;
+.btn{
+  background:var(--purple);
+  color:white;
+  padding:13px 20px;
+  border-radius:9px;
+  font-weight:800;
+  margin-top:8px;
 }
-
-/* PLAYER */
 
-.player {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  min-height: 85px;
-  background: #11131af5;
-  backdrop-filter: blur(20px);
-  border-top: 1px solid #30313b;
-  display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr;
-  align-items: center;
-  padding: 12px 25px;
-  gap: 20px;
-  z-index: 30;
-}
+.btn:hover{background:#bb83f7}
 
-.now-playing {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-width: 0;
+.btn.secondary{
+  background:#282b37;
 }
 
-.now-playing img {
-  width: 53px;
-  height: 53px;
-  border-radius: 8px;
-  object-fit: cover;
+.filters{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:20px 0;
 }
 
-.now-playing h4 {
-  font-size: 13px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+.filter{
+  background:var(--panel2);
+  color:#bbb;
+  padding:10px 18px;
+  border-radius:30px;
 }
 
-.now-playing p {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 5px;
+.filter.active{
+  background:var(--purple);
+  color:white;
 }
 
-.player-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 9px;
-  min-width: 0;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
+  gap:18px;
 }
 
-.controls {
-  display: flex;
-  align-items: center;
-  gap: 22px;
+.card{
+  background:var(--panel);
+  padding:10px;
+  border-radius:13px;
+  overflow:hidden;
+  transition:.2s;
 }
 
-.control {
-  background: transparent;
-  color: #ddd;
-  font-size: 19px;
+.card:hover{
+  background:#222531;
+  transform:translateY(-4px);
 }
 
-.control.main-play {
-  width: 38px;
-  height: 38px;
-  background: white;
-  color: #111;
-  border-radius: 50%;
+.thumb{
+  width:100%;
+  aspect-ratio:16/10;
+  background:#222;
+  object-fit:cover;
+  border-radius:9px;
+  cursor:pointer;
 }
 
-.progress-area {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  max-width: 450px;
-  font-size: 10px;
-  color: var(--muted);
+.card h3{
+  font-size:13px;
+  margin:12px 0 5px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
-input[type=range] {
-  accent-color: var(--accent);
-  cursor: pointer;
+.card p{
+  font-size:11px;
+  color:var(--muted);
 }
 
-#progress {
-  flex: 1;
+.card-actions{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
 }
 
-.volume-area {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 12px;
+.small-btn{
+  flex:1;
+  background:#292c39;
+  color:white;
+  padding:9px;
+  border-radius:7px;
 }
 
-.volume-area input {
-  width: 100px;
-}
+.small-btn:hover{background:var(--purple)}
 
-/* PROFILE / PLAYLIST */
+.page{display:none}
+.page.active{display:block}
 
-.page {
-  display: none;
+.empty{
+  padding:40px 15px;
+  background:var(--panel);
+  border-radius:12px;
+  text-align:center;
+  color:var(--muted);
+  grid-column:1/-1;
 }
 
-.page.active {
-  display: block;
+.viewer{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#000e;
+  z-index:20;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
 }
 
-.profile-panel {
-  background: var(--panel);
-  padding: 30px;
-  border-radius: 18px;
-  max-width: 650px;
-}
+.viewer.show{display:flex}
 
-.profile-preview {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: #30303d;
-  margin-bottom: 15px;
+.viewer-box{
+  width:min(100%,1000px);
+  max-height:90vh;
+  background:#151720;
+  border-radius:15px;
+  padding:15px;
+  position:relative;
+  overflow:auto;
 }
 
-.field {
-  display: block;
-  margin: 15px 0;
-  color: var(--muted);
-  font-size: 13px;
+.viewer-content{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:200px;
 }
 
-.field input {
-  display: block;
-  width: 100%;
-  background: #20222c;
-  border: 1px solid #353744;
-  border-radius: 9px;
-  padding: 13px;
-  margin-top: 8px;
-  color: white;
-  outline: none;
+.viewer-content img,
+.viewer-content video,
+.viewer-content iframe{
+  max-width:100%;
+  max-height:72vh;
+  border-radius:9px;
+  border:0;
 }
 
-.field input:focus {
-  border-color: var(--accent);
+.viewer-content iframe{
+  width:100%;
+  aspect-ratio:16/9;
 }
 
-.file-btn {
-  display: inline-block;
-  padding: 10px 15px;
-  background: #252632;
-  border-radius: 9px;
-  color: white;
-  cursor: pointer;
-  font-size: 12px;
-  margin: 5px 5px 10px 0;
+.close{
+  float:right;
+  color:white;
+  background:#30323e;
+  border-radius:50%;
+  width:35px;height:35px;
+  font-size:19px;
 }
 
-.file-btn input {
-  display: none;
+.viewer-title{
+  padding:12px 0;
+  font-size:14px;
 }
 
-.empty {
-  padding: 30px;
-  color: var(--muted);
-  background: var(--panel);
-  border-radius: 12px;
-  text-align: center;
+.status{
+  font-size:12px;
+  color:#c99aff;
+  margin-top:12px;
 }
-
-/* RESPONSIVE */
-
-@media(max-width:850px) {
-  .sidebar {
-    width: 70px;
-    padding: 20px 9px;
-  }
-
-  .logo {
-    font-size: 13px;
-    margin: 10px 0 35px;
-    text-align: center;
-  }
-
-  .logo span {
-    display: none;
-  }
 
-  .nav-title,
-  .nav-text,
-  .sidebar-bottom {
-    display: none;
-  }
-
-  .nav-item {
-    justify-content: center;
-    padding: 14px 5px;
-    font-size: 20px;
-  }
-
-  .main {
-    margin-left: 70px;
-    width: calc(100% - 70px);
-    padding: 20px 14px;
-  }
-
-  .hero {
-    padding: 25px;
-    min-height: 240px;
-  }
-
-  .player {
-    grid-template-columns: 1fr 1.2fr;
-    padding: 10px;
-  }
-
-  .volume-area {
-    display: none;
-  }
+@media(max-width:800px){
+  .sidebar{width:65px;padding:20px 7px}
+  .logo{font-size:11px;text-align:center;margin:10px 0 35px}
+  .logo span,.nav-title,.nav-text{display:none}
+  .nav{text-align:center;font-size:19px;padding:14px 5px}
+  .main{margin-left:65px;padding:18px 12px}
+  .hero{padding:23px}
+  .hero:after{right:10px;font-size:100px}
 }
-
-@media(max-width:500px) {
-  .music-grid {
-    grid-template-columns: repeat(2,minmax(0,1fr));
-    gap: 10px;
-  }
-
-  .topbar {
-    gap: 8px;
-  }
-
-  .profile-button {
-    padding: 5px;
-  }
-
-  .profile-button span {
-    display: none;
-  }
-
-  .player {
-    grid-template-columns: 1fr auto;
-    gap: 8px;
-  }
-
-  .player-center {
-    align-items: flex-end;
-  }
-
-  .controls {
-    gap: 12px;
-  }
-
-  .progress-area {
-    display: none;
-  }
-
-  .now-playing img {
-    width: 42px;
-    height: 42px;
-  }
 
-  .now-playing h4 {
-    max-width: 100px;
-  }
+@media(max-width:500px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .main{padding:15px 9px}
+  .add-box{padding:17px}
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
-
-<!-- MENU -->
 <aside class="sidebar">
-  <div class="logo">SOARES<span> MUSIC</span></div>
+  <div class="logo">SOARES<span> MEDIA</span></div>
 
-  <div class="nav-title">MENU PRINCIPAL</div>
+  <div class="nav-title">BIBLIOTECA</div>
 
-  <div class="nav-item active" onclick="showPage('home',this)">
-    <span class="nav-icon">⌂</span>
-    <span class="nav-text">Início</span>
+  <div class="nav active" onclick="changePage('home',this)">
+    🏠 <span class="nav-text">Início</span>
   </div>
 
-  <div class="nav-item" onclick="showPage('searchPage',this)">
-    <span class="nav-icon">⌕</span>
-    <span class="nav-text">Pesquisar</span>
+  <div class="nav" onclick="changePage('videos',this)">
+    🎬 <span class="nav-text">Vídeos</span>
   </div>
 
-  <div class="nav-item" onclick="showPage('favorites',this)">
-    <span class="nav-icon">♡</span>
-    <span class="nav-text">Favoritos</span>
+  <div class="nav" onclick="changePage('photos',this)">
+    🖼️ <span class="nav-text">Fotos</span>
   </div>
 
-  <div class="nav-item" onclick="showPage('playlists',this)">
-    <span class="nav-icon">▤</span>
-    <span class="nav-text">Playlists</span>
+  <div class="nav" onclick="changePage('favorites',this)">
+    ❤️ <span class="nav-text">Favoritos</span>
   </div>
 
-  <div class="nav-title">MINHA CONTA</div>
-
-  <div class="nav-item" onclick="showPage('profile',this)">
-    <span class="nav-icon">♙</span>
-    <span class="nav-text">Meu perfil</span>
+  <div class="nav" onclick="changePage('add',this)">
+    ＋ <span class="nav-text">Adicionar mídia</span>
   </div>
 
-  <div class="sidebar-bottom">
-    SOARES MUSIC © 2026<br>
-    Sua música. Seu mundo.
+  <div class="nav-title">SISTEMA</div>
+
+  <div class="nav" onclick="clearLibrary()">
+    ⚙️ <span class="nav-text">Limpar biblioteca</span>
   </div>
 </aside>
 
-<!-- CONTEÚDO -->
 <main class="main">
 
-<header class="topbar">
-  <input id="searchInput" class="search"
-    placeholder="⌕  Pesquisar músicas, artistas..."
-    oninput="searchMusic(this.value)">
+<header class="top">
+  <input class="search" id="search"
+    placeholder="⌕ Pesquisar vídeos e fotos..."
+    oninput="render()">
 
-  <button class="profile-button" onclick="showPage('profile')">
-    <img id="topAvatar" class="avatar" src="">
-    <span id="topName">Visitante</span>
-  </button>
+  <span style="font-weight:800;font-size:12px">
+    SOARES MEDIA
+  </span>
 </header>
 
 <!-- HOME -->
+
 <section class="page active" id="home">
 
   <div class="hero">
     <div class="hero-content">
-      <div class="hero-label">SOARES MUSIC ORIGINAL</div>
-      <h1>Sua música.<br>Seu universo.</h1>
-      <p>
-        Descubra novos sons, organize suas playlists
-        e curta suas músicas favoritas em um só lugar.
-      </p>
-      <button class="primary-btn" onclick="playIndex(0)">
-        ▶ COMEÇAR A OUVIR
-      </button>
+      <small>SUA CENTRAL MULTIMÍDIA</small>
+      <h1>Explore seu mundo.</h1>
+      <p>Todos os seus vídeos e imagens em um único lugar.</p>
     </div>
   </div>
 
   <div class="section">
-    <div class="section-header">
-      <h2>🔥 Destaques</h2>
-      <small>Descubra novos sons</small>
-    </div>
-    <div class="music-grid" id="musicGrid"></div>
+    <h2>✨ Sua biblioteca</h2>
+    <div class="grid" id="homeGrid"></div>
   </div>
 
+</section>
+
+<!-- VIDEOS -->
+
+<section class="page" id="videos">
   <div class="section">
-    <div class="section-header">
-      <h2>🎧 Adicionados recentemente</h2>
-    </div>
-    <div class="music-grid" id="recentGrid"></div>
+    <h2>🎬 Minha central de vídeos</h2>
+    <div class="grid" id="videoGrid"></div>
   </div>
 </section>
 
-<!-- PESQUISA -->
-<section class="page" id="searchPage">
+<!-- PHOTOS -->
+
+<section class="page" id="photos">
   <div class="section">
-    <h2>Pesquisar músicas</h2>
-    <p style="color:var(--muted);margin:12px 0 25px">
-      Encontre suas músicas favoritas.
-    </p>
-    <div class="music-grid" id="searchGrid"></div>
+    <h2>🖼️ Minha galeria de fotos</h2>
+    <div class="grid" id="photoGrid"></div>
   </div>
 </section>
 
-<!-- FAVORITOS -->
+<!-- FAVORITES -->
+
 <section class="page" id="favorites">
   <div class="section">
-    <h2>❤️ Minhas músicas favoritas</h2>
-    <div class="music-grid" id="favoriteGrid"></div>
+    <h2>❤️ Favoritos</h2>
+    <div class="grid" id="favoriteGrid"></div>
   </div>
 </section>
 
-<!-- PLAYLISTS -->
-<section class="page" id="playlists">
+<!-- ADD -->
+
+<section class="page" id="add">
+
   <div class="section">
-    <h2>📂 Minhas playlists</h2>
-    <br>
-    <input id="playlistName" class="search"
-      placeholder="Nome da nova playlist">
-    <button class="primary-btn" onclick="createPlaylist()">
-      + Criar playlist
-    </button>
-    <div id="playlistList" style="margin-top:25px"></div>
-  </div>
-</section>
+    <div class="add-box">
 
-<!-- PERFIL -->
-<section class="page" id="profile">
-  <div class="section">
-    <h2>👤 Minha conta</h2>
-    <br>
+      <h2>＋ Adicionar conteúdo</h2>
 
-    <div class="profile-panel">
-
-      <video id="profileVideo" class="profile-preview"
-        autoplay muted loop playsinline style="display:none"></video>
-
-      <img id="profileImage" class="profile-preview" src=""
-        alt="Foto de perfil">
-
-      <br>
-
-      <label class="file-btn">
-        📷 Escolher foto
-        <input type="file" accept="image/*" onchange="uploadAvatar(event,'image')">
-      </label>
-
-      <label class="file-btn">
-        🎬 Escolher vídeo
-        <input type="file" accept="video/*" onchange="uploadAvatar(event,'video')">
-      </label>
-
-      <label class="field">
-        Nome de usuário
-        <input id="username" placeholder="Seu nome">
-      </label>
-
-      <label class="field">
-        Nome de exibição
-        <input id="displayName" placeholder="Como deseja aparecer?">
-      </label>
-
-      <label class="field">
-        Sobre você
-        <input id="bio" placeholder="Conte um pouco sobre você...">
-      </label>
-
-      <button class="primary-btn" onclick="saveProfile()">
-        💾 Salvar meu perfil
-      </button>
-
-      <p style="font-size:11px;color:var(--muted);margin-top:20px">
-        Esta é uma demonstração local. Seus dados ficam
-        armazenados neste navegador.
+      <p>
+        Cole o endereço HTTPS de uma imagem ou vídeo.
+        O sistema tentará reconhecer o formato automaticamente.
       </p>
+
+      <input class="input" id="mediaUrl"
+        placeholder="https://exemplo.com/video.mp4">
+
+      <input class="input" id="mediaName"
+        placeholder="Nome do conteúdo">
+
+      <div class="row">
+        <button class="btn" onclick="addFromUrl()">
+          Adicionar link
+        </button>
+
+        <label class="btn secondary">
+          📁 Upload de arquivo
+          <input type="file" hidden multiple
+            accept="image/*,video/*"
+            onchange="addLocal(this.files);this.value=''">
+        </label>
+      </div>
+
+      <div class="status" id="status"></div>
 
     </div>
   </div>
+
 </section>
 
 </main>
+
+<!-- VISUALIZADOR -->
+
+<div class="viewer" id="viewer" onclick="closeOutside(event)">
+  <div class="viewer-box">
+
+    <button class="close" onclick="closeViewer()">×</button>
+
+    <div class="viewer-title" id="viewerTitle"></div>
+
+    <div class="viewer-content" id="viewerContent"></div>
+
+  </div>
 </div>
-
-<!-- PLAYER FIXO -->
-<div class="player">
-
-  <div class="now-playing">
-    <img id="playerCover"
-      src="https://placehold.co/100x100/24133e/ffffff?text=SM">
-
-    <div>
-      <h4 id="playerTitle">SOARES MUSIC</h4>
-      <p id="playerArtist">Escolha uma música</p>
-    </div>
-
-    <button class="like" id="playerLike" onclick="toggleCurrentLike()">♡</button>
-  </div>
-
-  <div class="player-center">
-    <div class="controls">
-      <button class="control" onclick="previousSong()">⏮</button>
-      <button class="control main-play" id="playButton"
-        onclick="togglePlay()">▶</button>
-      <button class="control" onclick="nextSong()">⏭</button>
-    </div>
-
-    <div class="progress-area">
-      <span id="currentTime">0:00</span>
-      <input id="progress" type="range" min="0" max="100"
-        value="0" oninput="seekMusic(this.value)">
-      <span id="duration">0:00</span>
-    </div>
-  </div>
-
-  <div class="volume-area">
-    <span>🔊</span>
-    <input type="range" min="0" max="1" step="0.01"
-      value="0.7" oninput="audio.volume=this.value">
-  </div>
-
-</div>
-
-<audio id="audio"></audio>
 
 <script>
 
-// ======================================
-// SOARES MUSIC - SISTEMA PRINCIPAL
-// ======================================
+// ====================================
+// CONFIGURAÇÃO
+// ====================================
 
-const audio = document.getElementById("audio");
+const STORAGE_KEY = "soares_media_library_v1";
 
-let currentIndex = -1;
-let favorites = JSON.parse(localStorage.getItem("sm_favorites") || "[]");
-let playlists = JSON.parse(localStorage.getItem("sm_playlists") || "[]");
-let tracks = [];
-let profile = JSON.parse(localStorage.getItem("sm_profile") || "{}");
+let media = [];
 
-// Músicas demonstrativas.
-// Substitua os endereços por arquivos de áudio
-// que você tenha direito de utilizar.
-
-const demoTracks = [
-{
-  title: "Dreams",
-  artist: "Artista demonstrativo",
-  cover: "https://picsum.photos/seed/dreams/400/400",
-  url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-},
-{
-  title: "Night Drive",
-  artist: "Artista demonstrativo",
-  cover: "https://picsum.photos/seed/night/400/400",
-  url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-},
-{
-  title: "Purple Sky",
-  artist: "Artista demonstrativo",
-  cover: "https://picsum.photos/seed/purple/400/400",
-  url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
-},
-{
-  title: "Memories",
-  artist: "Artista demonstrativo",
-  cover: "https://picsum.photos/seed/memory/400/400",
-  url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
-},
-{
-  title: "Summer",
-  artist: "Artista demonstrativo",
-  cover: "https://picsum.photos/seed/summer/400/400",
-  url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"
-},
-{
-  title: "Midnight",
-  artist: "Artista demonstrativo",
-  cover: "https://picsum.photos/seed/midnight/400/400",
-  url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"
-}
-];
-
-tracks = demoTracks.map((t,i)=>({...t,id:i}));
-
-// ======================================
-// EXIBIÇÃO DAS MÚSICAS
-// ======================================
-
-function renderTracks(list, containerId) {
-
-  const container = document.getElementById(containerId);
-
-  if(!container) return;
-
-  if(!list.length) {
-    container.innerHTML = '<div class="empty">Nenhuma música encontrada.</div>';
-    return;
-  }
-
-  container.innerHTML = list.map(track=>`
-
-    <div class="music-card">
-
-      <img class="cover"
-        src="${escapeHTML(track.cover)}"
-        alt="Capa de ${escapeHTML(track.title)}">
-
-      <h3>${escapeHTML(track.title)}</h3>
-      <p>${escapeHTML(track.artist)}</p>
-
-      <div class="card-bottom">
-
-        <button class="like ${favorites.includes(track.id) ? 'liked' : ''}"
-          onclick="toggleFavorite(${track.id},event)">
-          ${favorites.includes(track.id) ? '♥' : '♡'}
-        </button>
-
-        <button class="play-small"
-          onclick="playTrack(${track.id})">
-          ▶
-        </button>
-
-      </div>
-    </div>
-
-  `).join("");
+try {
+  media = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  if(!Array.isArray(media)) media = [];
+} catch {
+  media = [];
 }
 
-function renderAll() {
-  renderTracks(tracks,"musicGrid");
-  renderTracks(tracks.slice().reverse(),"recentGrid");
-  renderTracks(tracks.filter(t=>favorites.includes(t.id)),"favoriteGrid");
-  renderPlaylists();
-}
+let currentFilter = "all";
 
-// ======================================
-// PLAYER MUSICAL
-// ======================================
+// ====================================
+// SEGURANÇA
+// ====================================
 
-function playTrack(id) {
-
-  const index = tracks.findIndex(t=>t.id===id);
-
-  if(index < 0) return;
-
-  currentIndex = index;
-
-  const track = tracks[currentIndex];
-
-  audio.src = track.url;
-
-  document.getElementById("playerTitle").textContent = track.title;
-  document.getElementById("playerArtist").textContent = track.artist;
-  document.getElementById("playerCover").src = track.cover;
-
-  updatePlayerLike();
-
-  audio.play().then(()=>{
-    document.getElementById("playButton").textContent = "Ⅱ";
-  }).catch(()=>{
-    document.getElementById("playButton").textContent = "▶";
-  });
-
-}
-
-function playIndex(index) {
-  if(tracks[index]) playTrack(tracks[index].id);
-}
-
-function togglePlay() {
-
-  if(!audio.src) {
-    playIndex(0);
-    return;
-  }
-
-  if(audio.paused) {
-    audio.play();
-    document.getElementById("playButton").textContent = "Ⅱ";
-  } else {
-    audio.pause();
-    document.getElementById("playButton").textContent = "▶";
-  }
-
-}
-
-function nextSong() {
-  if(!tracks.length) return;
-
-  let next = (currentIndex + 1) % tracks.length;
-  playTrack(tracks[next].id);
-}
-
-function previousSong() {
-  if(!tracks.length) return;
-
-  if(audio.currentTime > 3) {
-    audio.currentTime = 0;
-    return;
-  }
-
-  let previous = (currentIndex - 1 + tracks.length) % tracks.length;
-  playTrack(tracks[previous].id);
-}
-
-audio.addEventListener("ended",nextSong);
-
-audio.addEventListener("timeupdate",()=>{
-
-  if(!audio.duration) return;
-
-  document.getElementById("progress").value =
-    (audio.currentTime/audio.duration)*100;
-
-  document.getElementById("currentTime").textContent =
-    formatTime(audio.currentTime);
-
-  document.getElementById("duration").textContent =
-    formatTime(audio.duration);
-
-});
-
-function seekMusic(value) {
-  if(audio.duration) {
-    audio.currentTime = (value/100)*audio.duration;
-  }
-}
-
-function formatTime(seconds) {
-  if(!Number.isFinite(seconds)) return "0:00";
-
-  let min = Math.floor(seconds/60);
-  let sec = Math.floor(seconds%60);
-
-  return min+":"+String(sec).padStart(2,"0");
-}
-
-// ======================================
-// FAVORITOS
-// ======================================
-
-function toggleFavorite(id,event) {
-
-  if(event) event.stopPropagation();
-
-  if(favorites.includes(id)) {
-    favorites = favorites.filter(x=>x!==id);
-  } else {
-    favorites.push(id);
-  }
-
-  localStorage.setItem("sm_favorites",JSON.stringify(favorites));
-
-  renderAll();
-  updatePlayerLike();
-}
-
-function toggleCurrentLike() {
-
-  if(currentIndex < 0) return;
-
-  toggleFavorite(tracks[currentIndex].id);
-}
-
-function updatePlayerLike() {
-
-  const button = document.getElementById("playerLike");
-
-  if(currentIndex < 0) return;
-
-  const id = tracks[currentIndex].id;
-
-  button.textContent = favorites.includes(id) ? "♥" : "♡";
-  button.classList.toggle("liked",favorites.includes(id));
-}
-
-// ======================================
-// PESQUISA
-// ======================================
-
-function searchMusic(query) {
-
-  showPage("searchPage");
-
-  const result = tracks.filter(track=>
-    track.title.toLowerCase().includes(query.toLowerCase()) ||
-    track.artist.toLowerCase().includes(query.toLowerCase())
-  );
-
-  renderTracks(result,"searchGrid");
-}
-
-// ======================================
-// NAVEGAÇÃO
-// ======================================
-
-function showPage(id,element) {
-
-  document.querySelectorAll(".page").forEach(page=>{
-    page.classList.remove("active");
-  });
-
-  document.getElementById(id).classList.add("active");
-
-  document.querySelectorAll(".nav-item").forEach(item=>{
-    item.classList.remove("active");
-  });
-
-  if(element) element.classList.add("active");
-
-  if(id==="favorites") renderTracks(
-    tracks.filter(t=>favorites.includes(t.id)),
-    "favoriteGrid"
-  );
-
-  if(id==="playlists") renderPlaylists();
-}
-
-// ======================================
-// PLAYLISTS
-// ======================================
-
-function createPlaylist() {
-
-  const input = document.getElementById("playlistName");
-  const name = input.value.trim();
-
-  if(!name) {
-    alert("Digite um nome para sua playlist!");
-    return;
-  }
-
-  playlists.push({
-    name,
-    songs:[]
-  });
-
-  localStorage.setItem("sm_playlists",JSON.stringify(playlists));
-
-  input.value = "";
-  renderPlaylists();
-
-}
-
-function renderPlaylists() {
-
-  const container = document.getElementById("playlistList");
-
-  if(!container) return;
-
-  if(!playlists.length) {
-    container.innerHTML = '<div class="empty">Você ainda não criou playlists.</div>';
-    return;
-  }
-
-  container.innerHTML = playlists.map((p,index)=>`
-
-    <div class="music-card" style="margin-bottom:12px">
-
-      <h3>📂 ${escapeHTML(p.name)}</h3>
-
-      <p>${p.songs.length} música(s)</p>
-
-      <button class="primary-btn"
-        style="margin-top:12px"
-        onclick="addToPlaylist(${index})">
-        + Adicionar música
-      </button>
-
-      <button class="like"
-        onclick="deletePlaylist(${index})">
-        🗑
-      </button>
-
-    </div>
-
-  `).join("");
-
-}
-
-function addToPlaylist(index) {
-
-  if(currentIndex < 0) {
-    alert("Primeiro escolha uma música!");
-    return;
-  }
-
-  const id = tracks[currentIndex].id;
-
-  if(!playlists[index].songs.includes(id)) {
-    playlists[index].songs.push(id);
-  }
-
-  localStorage.setItem("sm_playlists",JSON.stringify(playlists));
-
-  renderPlaylists();
-
-  alert("Música adicionada à playlist!");
-}
-
-function deletePlaylist(index) {
-
-  if(!confirm("Deseja excluir esta playlist?")) return;
-
-  playlists.splice(index,1);
-
-  localStorage.setItem("sm_playlists",JSON.stringify(playlists));
-
-  renderPlaylists();
-}
-
-// ======================================
-// PERFIL E CADASTRO LOCAL
-// ======================================
-
-function uploadAvatar(event,type) {
-
-  const file = event.target.files[0];
-
-  if(!file) return;
-
-  const maxSize = 2 * 1024 * 1024;
-
-  if(file.size > maxSize) {
-    alert("Escolha um arquivo de até 2 MB para o perfil.");
-    event.target.value = "";
-    return;
-  }
-
-  const reader = new FileReader();
-
-  reader.onload = e=>{
-
-    profile.media = e.target.result;
-    profile.mediaType = type;
-
-    updateProfileDisplay();
-
-  };
-
-  reader.readAsDataURL(file);
-}
-
-function saveProfile() {
-
-  profile.username = document.getElementById("username").value.trim();
-  profile.displayName = document.getElementById("displayName").value.trim();
-  profile.bio = document.getElementById("bio").value.trim();
-
-  localStorage.setItem("sm_profile",JSON.stringify(profile));
-
-  updateProfileDisplay();
-
-  alert("Perfil salvo com sucesso! 🎉");
-}
-
-function updateProfileDisplay() {
-
-  document.getElementById("topName").textContent =
-    profile.displayName || profile.username || "Visitante";
-
-  const image = document.getElementById("profileImage");
-  const video = document.getElementById("profileVideo");
-  const avatar = document.getElementById("topAvatar");
-
-  if(profile.media) {
-
-    if(profile.mediaType==="video") {
-
-      image.style.display = "none";
-      video.style.display = "block";
-      video.src = profile.media;
-      avatar.src = "";
-
-    } else {
-
-      video.style.display = "none";
-      image.style.display = "block";
-
-      image.src = profile.media;
-      avatar.src = profile.media;
-
-    }
-
-  }
-
-  document.getElementById("username").value = profile.username || "";
-  document.getElementById("displayName").value = profile.displayName || "";
-  document.getElementById("bio").value = profile.bio || "";
-
-}
-
-// ======================================
-// ADICIONAR MÚSICAS DO COMPUTADOR
-// ======================================
-
-function addLocalMusic(file) {
-
-  if(!file || !file.type.startsWith("audio/")) {
-    alert("Selecione um arquivo de áudio válido.");
-    return;
-  }
-
-  const url = URL.createObjectURL(file);
-
-  const track = {
-    id: Date.now(),
-    title: file.name.replace(/\.[^/.]+$/,""),
-    artist: "Arquivo local",
-    cover: "https://picsum.photos/seed/localmusic/400/400",
-    url,
-    local:true
-  };
-
-  tracks.push(track);
-
-  renderAll();
-
-  alert("Música adicionada à biblioteca!");
-}
-
-// ======================================
-// PROTEÇÃO DE TEXTO HTML
-// ======================================
-
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g,char=>({
+function escapeHTML(value){
+  return String(value).replace(/[&<>"']/g,c=>({
     "&":"&amp;",
     "<":"&lt;",
     ">":"&gt;",
     '"':"&quot;",
     "'":"&#39;"
-  })[char]);
+  })[c]);
 }
 
-// ======================================
-// INICIALIZAÇÃO
-// ======================================
+function safeURL(value){
+  try{
+    const url = new URL(value,location.href);
 
-audio.volume = 0.7;
+    if(url.protocol!=="https:" &&
+       url.protocol!=="http:") return null;
 
-updateProfileDisplay();
-renderAll();
+    return url.href;
+  }catch{
+    return null;
+  }
+}
+
+function save(){
+  const persistent = media.filter(item=>!item.local);
+
+  try{
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(persistent));
+  }catch{
+    setStatus("Armazenamento cheio. Remova alguns itens.");
+  }
+}
+
+// ====================================
+// IDENTIFICAR TIPO
+// ====================================
+
+function detectType(url){
+
+  const clean = url.split("?")[0].toLowerCase();
+
+  if(/\.(jpg|jpeg|png|gif|webp|avif|bmp)$/.test(clean))
+    return "image";
+
+  if(/\.(mp4|webm|ogg|mov|m4v)$/.test(clean))
+    return "video";
+
+  return "unknown";
+}
+
+// ====================================
+// ADICIONAR LINK
+// ====================================
+
+async function addFromUrl(){
+
+  const urlInput = document.getElementById("mediaUrl");
+  const nameInput = document.getElementById("mediaName");
+
+  const url = safeURL(urlInput.value.trim());
+
+  if(!url){
+    setStatus("Endereço inválido. Utilize HTTP ou HTTPS.");
+    return;
+  }
+
+  let type = detectType(url);
+
+  if(type==="unknown"){
+    type = await detectByFetch(url);
+  }
+
+  if(type==="unknown"){
+    setStatus("Não consegui identificar a mídia. Verifique o link ou escolha o tipo manualmente.");
+    showTypeChoices(url);
+    return;
+  }
+
+  addItem({
+    id:Date.now(),
+    name:nameInput.value.trim() || "Minha mídia",
+    url,
+    type,
+    favorite:false,
+    local:false
+  });
+
+  urlInput.value="";
+  nameInput.value="";
+
+  setStatus("Mídia adicionada com sucesso! 🎉");
+
+  render();
+}
+
+// ====================================
+// DETECÇÃO AUTOMÁTICA
+// ====================================
+
+async function detectByFetch(url){
+
+  const controller = new AbortController();
+  const timeout = setTimeout(()=>controller.abort(),5000);
+
+  try{
+
+    const response = await fetch(url,{
+      method:"HEAD",
+      mode:"cors",
+      signal:controller.signal
+    });
+
+    const contentType = response.headers.get("content-type") || "";
+
+    if(contentType.startsWith("image/")) return "image";
+    if(contentType.startsWith("video/")) return "video";
+
+  }catch(error){
+    // O servidor pode bloquear requisições externas.
+  }finally{
+    clearTimeout(timeout);
+  }
+
+  return "unknown";
+}
+
+function showTypeChoices(url){
+
+  const status = document.getElementById("status");
+
+  status.innerHTML = `
+    <p>Qual é o tipo deste link?</p>
+    <button class="btn" onclick="addManual('${escapeHTML(url)}','image')">
+      🖼️ Imagem
+    </button>
+    <button class="btn" onclick="addManual('${escapeHTML(url)}','video')">
+      🎬 Vídeo
+    </button>
+  `;
+}
+
+function addManual(url,type){
+
+  addItem({
+    id:Date.now(),
+    name:document.getElementById("mediaName").value.trim() || "Minha mídia",
+    url,
+    type,
+    favorite:false,
+    local:false
+  });
+
+  setStatus("Conteúdo adicionado!");
+  render();
+}
+
+// ====================================
+// ADICIONAR ARQUIVO LOCAL
+// ====================================
+
+function addLocal(files){
+
+  [...files].forEach(file=>{
+
+    if(!file.type.startsWith("image/") &&
+       !file.type.startsWith("video/")) return;
+
+    const url = URL.createObjectURL(file);
+
+    media.push({
+      id:Date.now()+Math.random(),
+      name:file.name,
+      url,
+      type:file.type.startsWith("image/")?"image":"video",
+      favorite:false,
+      local:true
+    });
+
+  });
+
+  render();
+
+  setStatus("Arquivos carregados nesta sessão!");
+}
+
+// ====================================
+// BIBLIOTECA
+// ====================================
+
+function addItem(item){
+
+  media.unshift(item);
+
+  save();
+  render();
+}
+
+function renderCard(item){
+
+  const preview = item.type==="image"
+    ? `<img class="thumb" src="${escapeHTML(item.url)}"
+         loading="lazy" onclick="openMedia('${item.id}')">`
+    : `<video class="thumb" src="${escapeHTML(item.url)}"
+         preload="metadata" muted playsinline
+         onclick="openMedia('${item.id}')"></video>`;
+
+  return `
+    <article class="card">
+      ${preview}
+
+      <h3>${escapeHTML(item.name)}</h3>
+      <p>${item.type==="video"?"🎬 Vídeo":"🖼️ Imagem"}</p>
+
+      <div class="card-actions">
+        <button class="small-btn"
+          onclick="openMedia('${item.id}')">
+          Abrir
+        </button>
+
+        <button class="small-btn"
+          onclick="toggleFavorite('${item.id}')">
+          ${item.favorite?"♥":"♡"}
+        </button>
+
+        <button class="small-btn"
+          onclick="removeMedia('${item.id}')">
+          ✕
+        </button>
+      </div>
+    </article>
+  `;
+}
+
+function render(){
+
+  const query = document.getElementById("search").value.toLowerCase();
+
+  const filtered = media.filter(item=>
+    item.name.toLowerCase().includes(query)
+  );
+
+  document.getElementById("homeGrid").innerHTML =
+    filtered.map(renderCard).join("") ||
+    '<div class="empty">Sua biblioteca está vazia.</div>';
+
+  document.getElementById("videoGrid").innerHTML =
+    filtered.filter(x=>x.type==="video").map(renderCard).join("") ||
+    '<div class="empty">Nenhum vídeo encontrado.</div>';
+
+  document.getElementById("photoGrid").innerHTML =
+    filtered.filter(x=>x.type==="image").map(renderCard).join("") ||
+    '<div class="empty">Nenhuma foto encontrada.</div>';
+
+  document.getElementById("favoriteGrid").innerHTML =
+    filtered.filter(x=>x.favorite).map(renderCard).join("") ||
+    '<div class="empty">Nenhum favorito ainda.</div>';
+
+}
+
+// ====================================
+// VISUALIZADOR
+// ====================================
+
+function openMedia(id){
+
+  const item = media.find(x=>String(x.id)===String(id));
+
+  if(!item)return;
+
+  const content = document.getElementById("viewerContent");
+
+  document.getElementById("viewerTitle").textContent=item.name;
+
+  if(item.type==="image"){
+
+    const img=document.createElement("img");
+    img.src=item.url;
+    img.alt=item.name;
+    content.replaceChildren(img);
+
+  }else{
+
+    const video=document.createElement("video");
+    video.src=item.url;
+    video.controls=true;
+    video.autoplay=true;
+    video.playsInline=true;
+
+    content.replaceChildren(video);
+
+  }
+
+  document.getElementById("viewer").classList.add("show");
+}
+
+function closeViewer(){
+
+  const content=document.getElementById("viewerContent");
+
+  content.querySelectorAll("video").forEach(v=>{
+    v.pause();
+  });
+
+  content.replaceChildren();
+
+  document.getElementById("viewer").classList.remove("show");
+}
+
+function closeOutside(event){
+  if(event.target.id==="viewer") closeViewer();
+}
+
+// ====================================
+// FAVORITOS
+// ====================================
+
+function toggleFavorite(id){
+
+  const item=media.find(x=>String(x.id)===String(id));
+
+  if(!item)return;
+
+  item.favorite=!item.favorite;
+
+  save();
+  render();
+}
+
+// ====================================
+// EXCLUIR
+// ====================================
+
+function removeMedia(id){
+
+  const item=media.find(x=>String(x.id)===String(id));
+
+  if(!item)return;
+
+  if(!confirm("Deseja remover este conteúdo?"))return;
+
+  if(item.local) URL.revokeObjectURL(item.url);
+
+  media=media.filter(x=>String(x.id)!==String(id));
+
+  save();
+  render();
+}
+
+// ====================================
+// NAVEGAÇÃO
+// ====================================
+
+function changePage(id,element){
+
+  document.querySelectorAll(".page").forEach(p=>{
+    p.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".nav").forEach(n=>{
+    n.classList.remove("active");
+  });
+
+  if(element)element.classList.add("active");
+
+}
+
+// ====================================
+// LIMPAR BIBLIOTECA
+// ====================================
+
+function clearLibrary(){
+
+  if(!confirm("Apagar todos os links salvos?"))return;
+
+  media.filter(x=>x.local).forEach(x=>{
+    URL.revokeObjectURL(x.url);
+  });
+
+  media=[];
+  save();
+  render();
+
+}
+
+// ====================================
+// STATUS
+// ====================================
+
+function setStatus(message){
+  document.getElementById("status").textContent=message;
+}
+
+// ====================================
+// INICIAR
+// ====================================
+
+render();
 
 </script>
-
-<!-- BOTÃO DE IMPORTAÇÃO DE MÚSICAS -->
-<div style="
-position:fixed;
-right:20px;
-bottom:105px;
-z-index:20;
-">
-<label class="primary-btn" style="display:block">
-  ＋ Importar música
-  <input type="file" accept="audio/*" multiple
-    style="display:none"
-    onchange="
-      [...this.files].forEach(addLocalMusic);
-      this.value='';
-    ">
-</label>
-</div>
 
 </body>
 </html>

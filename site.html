@@ -3,377 +3,268 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#10131c">
-
-<title>Soares Browser</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soares Media Gallery</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
   background: #10131c;
-  color: #fff;
+  color: white;
   font-family: Arial, sans-serif;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
 header {
-  padding: 17px;
-  background: #171b27;
-  border-bottom: 1px solid #292f40;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.logo {
-  font-size: 19px;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-.logo span {
-  color: #7485ff;
-}
-
-.status {
-  color: #65dc9a;
-  font-size: 12px;
-}
-
-.toolbar {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 12px;
+  padding: 24px;
   background: #191e2b;
+  text-align: center;
 }
 
-.toolbar button {
-  min-width: 38px;
-  height: 40px;
-  border: 0;
-  border-radius: 9px;
-  background: #292f40;
-  color: white;
-  font-size: 17px;
-  cursor: pointer;
+header h1 {
+  margin: 0;
+  color: #7889ff;
 }
 
-.toolbar button:active {
-  background: #5865f2;
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
 }
 
-.address {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  background: #292f40;
+.painel {
+  background: #1b2130;
+  border: 1px solid #30394d;
+  border-radius: 15px;
+  padding: 18px;
+  margin-bottom: 25px;
+}
+
+input {
+  width: 100%;
+  padding: 13px;
+  border-radius: 8px;
   border: 1px solid #3a4258;
+  background: #101722;
+  color: white;
+  margin: 8px 0;
+}
+
+button {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #5865f2;
+  color: white;
+  cursor: pointer;
+  margin-top: 7px;
+}
+
+button:hover {
+  background: #7481ff;
+}
+
+.upload {
+  display: block;
+  padding: 16px;
+  border: 2px dashed #5865f2;
   border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.upload input {
+  display: none;
+}
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.item {
+  background: #1b2130;
+  border: 1px solid #30394d;
+  border-radius: 12px;
   overflow: hidden;
 }
 
-.address input {
+.item img,
+.item video {
   width: 100%;
-  min-width: 0;
-  border: 0;
-  outline: none;
-  padding: 0 12px;
-  background: transparent;
-  color: white;
-  font-size: 13px;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+  background: #080a10;
 }
 
-.go {
-  background: #5865f2 !important;
-  padding: 0 14px;
-  font-size: 13px !important;
-}
-
-.tools {
+.acoes {
+  padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 9px 13px;
-  background: #141925;
-  font-size: 12px;
 }
 
-.tools button {
-  border: 0;
-  background: transparent;
-  color: #9ca9ff;
-  cursor: pointer;
-  padding: 6px;
+.acoes button {
+  background: #d94455;
 }
 
-.viewer {
-  flex: 1;
-  position: relative;
-  background: #fff;
-  min-height: 0;
+small {
+  color: #9ba6bd;
 }
 
-iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  background: white;
-}
-
-.home {
-  position: absolute;
-  inset: 0;
-  background: #10131c;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 25px;
-  text-align: center;
-}
-
-.home h1 {
-  font-size: 32px;
-  margin-bottom: 5px;
-}
-
-.home p {
-  color: #929bad;
-  font-size: 14px;
-}
-
-.shortcuts {
-  display: flex;
-  gap: 12px;
-  margin-top: 25px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.shortcuts button {
-  padding: 14px;
-  border: 1px solid #333b50;
-  background: #1c2332;
-  color: white;
-  border-radius: 12px;
-  cursor: pointer;
-}
-
-footer {
-  background: #171b27;
-  padding: 10px;
-  text-align: center;
-  font-size: 11px;
-  color: #788298;
-}
-
-@media(max-width: 480px) {
-  header {
-    padding: 13px;
-  }
-
-  .toolbar {
-    gap: 5px;
-    padding: 8px;
-  }
-
-  .toolbar button {
-    min-width: 32px;
-    height: 38px;
-  }
-}
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">🌐 SOARES <span>BROWSER</span></div>
-  <div class="status">● ONLINE</div>
+  <h1>📸 SOARES MEDIA</h1>
+  <p>Sua galeria de fotos e vídeos</p>
 </header>
 
-<div class="toolbar">
+<main>
 
-  <button onclick="voltar()" title="Voltar">‹</button>
+<section class="painel">
 
-  <button onclick="avancar()" title="Avançar">›</button>
+  <h2>Adicionar mídia</h2>
 
-  <button onclick="recarregar()" title="Atualizar">↻</button>
-
-  <div class="address">
+  <label class="upload">
+    📁 Escolher fotos e vídeos
     <input
-      id="url"
-      type="text"
-      placeholder="Digite um endereço HTTPS..."
-      autocomplete="url"
-      onkeydown="if(event.key==='Enter') abrir()"
+      type="file"
+      id="arquivos"
+      accept="image/*,video/*"
+      multiple
     >
+  </label>
 
-    <button class="go" onclick="abrir()">IR</button>
-  </div>
+  <h3>Ou adicionar por link</h3>
 
-  <button onclick="inicio()" title="Início">⌂</button>
+  <input
+    type="url"
+    id="link"
+    placeholder="Cole o link da imagem ou vídeo"
+  >
 
-</div>
-
-<div class="tools">
-  <span id="status">Página inicial</span>
-
-  <button onclick="novaAba()">
-    ↗ Abrir externamente
+  <button onclick="adicionarLink()">
+    Adicionar link
   </button>
-</div>
 
-<main class="viewer">
+  <p><small>
+    Aceita imagens e vídeos com endereço direto.
+  </small></p>
 
-  <div class="home" id="home">
-    <h1>SOARES BROWSER</h1>
-    <p>Seu espaço para navegar na internet.</p>
+</section>
 
-    <div class="shortcuts">
-      <button onclick="navegar('https://www.wikipedia.org')">
-        📚 Wikipedia
-      </button>
+<h2>Minha galeria</h2>
 
-      <button onclick="navegar('https://www.google.com')">
-        🔎 Google
-      </button>
-
-      <button onclick="navegar('https://www.youtube.com')">
-        ▶ YouTube
-      </button>
-    </div>
-  </div>
-
-  <iframe
-    id="pagina"
-    title="Navegador integrado"
-    referrerpolicy="no-referrer">
-  </iframe>
+<div class="galeria" id="galeria"></div>
 
 </main>
 
-<footer>
-  SOARES BROWSER © 2026 — Navegador Web
-</footer>
-
 <script>
 
-const campo = document.getElementById("url");
-const pagina = document.getElementById("pagina");
-const home = document.getElementById("home");
-const status = document.getElementById("status");
+const galeria = document.getElementById("galeria");
 
-let enderecoAtual = "";
+function criarItem(url, tipo, temporario = false) {
 
-function validarEndereco(valor) {
+  const item = document.createElement("div");
+  item.className = "item";
 
-  valor = valor.trim();
+  let midia;
 
-  if (!valor) return null;
-
-  if (!/^https?:\/\//i.test(valor)) {
-    valor = "https://" + valor;
+  if (tipo.startsWith("image/")) {
+    midia = document.createElement("img");
+    midia.alt = "Imagem da galeria";
+  } else {
+    midia = document.createElement("video");
+    midia.controls = true;
+    midia.playsInline = true;
   }
 
+  midia.src = url;
+
+  const acoes = document.createElement("div");
+  acoes.className = "acoes";
+
+  const texto = document.createElement("small");
+  texto.textContent = tipo.startsWith("image/")
+    ? "📸 Fotografia"
+    : "🎬 Vídeo";
+
+  const remover = document.createElement("button");
+  remover.textContent = "Remover";
+
+  remover.onclick = () => {
+    item.remove();
+
+    if (temporario) {
+      URL.revokeObjectURL(url);
+    }
+  };
+
+  acoes.append(texto, remover);
+  item.append(midia, acoes);
+  galeria.prepend(item);
+}
+
+document.getElementById("arquivos")
+.addEventListener("change", function() {
+
+  Array.from(this.files).forEach(file => {
+
+    if (!file.type.startsWith("image/") &&
+        !file.type.startsWith("video/")) return;
+
+    const url = URL.createObjectURL(file);
+
+    criarItem(url, file.type, true);
+
+  });
+
+  this.value = "";
+
+});
+
+function adicionarLink() {
+
+  const campo = document.getElementById("link");
+  const valor = campo.value.trim();
+
+  if (!valor) return;
+
   try {
-    const link = new URL(valor);
 
-    if (
-      link.protocol !== "https:" &&
-      link.protocol !== "http:"
-    ) return null;
+    const url = new URL(valor);
 
-    return link.href;
+    if (!["https:", "http:"].includes(url.protocol)) {
+      throw new Error();
+    }
+
+    const extensao = url.pathname.toLowerCase();
+
+    let tipo;
+
+    if (/\.(jpg|jpeg|png|gif|webp|avif|svg)$/.test(extensao)) {
+      tipo = "image/external";
+    } else if (/\.(mp4|webm|ogg|mov)$/.test(extensao)) {
+      tipo = "video/external";
+    } else {
+      alert("Use um link direto de imagem ou vídeo.");
+      return;
+    }
+
+    criarItem(valor, tipo);
+    campo.value = "";
 
   } catch {
-    return null;
+    alert("Link inválido!");
   }
 }
-
-function navegar(link) {
-
-  const endereco = validarEndereco(link);
-
-  if (!endereco) {
-    alert("Endereço inválido!");
-    return;
-  }
-
-  enderecoAtual = endereco;
-  campo.value = endereco;
-
-  home.style.display = "none";
-  status.textContent = "Carregando página...";
-
-  pagina.src = endereco;
-}
-
-function abrir() {
-  navegar(campo.value);
-}
-
-function inicio() {
-
-  pagina.src = "about:blank";
-  campo.value = "";
-  enderecoAtual = "";
-
-  home.style.display = "flex";
-  status.textContent = "Página inicial";
-}
-
-function recarregar() {
-
-  if (enderecoAtual) {
-    pagina.src = enderecoAtual;
-    status.textContent = "Atualizando...";
-  }
-}
-
-function voltar() {
-  try {
-    pagina.contentWindow.history.back();
-  } catch(e) {
-    status.textContent = "Não foi possível voltar";
-  }
-}
-
-function avancar() {
-  try {
-    pagina.contentWindow.history.forward();
-  } catch(e) {
-    status.textContent = "Não foi possível avançar";
-  }
-}
-
-function novaAba() {
-
-  const endereco = validarEndereco(campo.value);
-
-  if (!endereco) {
-    alert("Digite um endereço válido!");
-    return;
-  }
-
-  window.open(
-    endereco,
-    "_blank",
-    "noopener,noreferrer"
-  );
-}
-
-pagina.addEventListener("load", () => {
-  status.textContent = "Navegação carregada";
-});
 
 </script>
 
